@@ -21,7 +21,12 @@ export default function DataContextProvider({children})
             toastMessage: "",
             toastSuccess: "",
             toastError: "",
-            showSpinner: false
+            showSpinner: false,
+            config: {
+                baseUrl: "http://localhost:3001",
+            },
+            hostels: [],
+            firstRun: true,
         }
         return data;
     });

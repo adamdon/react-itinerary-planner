@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect} from "react";
 import {useData} from "../../../DataContextProvider"
 import ContainerLayout from "../../containers/ContainerLayout";
 import ContainerContentRow from "../../containers/ContainerContentRow";
@@ -10,6 +10,33 @@ export default function HostelsPage()
 {
     const [data, setData] = useData();
 
+    useEffect( () =>
+    {
+        async function mountUseEffect()
+        {
+            await fetchHostelData();
+        }
+        mountUseEffect().then(r => console.log("HostelsPage mountUseEffect complete"))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+
+
+
+    async function fetchHostelData()
+    {
+        // setData({toastMessage: "componentDidMount"});
+        console.log("componentDidMount call");
+
+        setData({showSpinner: true});
+        const response = await fetch(data.config.baseUrl + "/hostels")
+        const json = await response.json();
+
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        setData({showSpinner: false});
+        console.log(json);
+
+    }
 
 
     return (
@@ -17,16 +44,18 @@ export default function HostelsPage()
             <ContainerLayout>
 
                 <ContainerContentRow>
-                    <ContainerContent size="12" icon="info" title="1">
+                    <ContainerContent size="12" icon="search" title="Search">
 
-                        <h4>Bootstrap 5 Search Bar</h4>
-                        <p className="mb-3">To make a large search bar, we need to add both form-control and form-control-lg classes in the input element.</p>
+                        <h4>Search for a hostel</h4>
+                        <button onClick={fetchHostelData}>call</button>
+                        <p className="mb-3">
+                            Find a hostel for your next trip by looking up the name or description
+                        </p>
 
                         <form action="" className="">
                             <div className="input-group mb-3">
                                 <input type="text" className="form-control form-control-lg" placeholder="Search Here"/>
-                                <button type="submit" className="input-group-text btn-success"><i className="bi bi-search me-2"></i> Search</button>
-
+                                <button type="submit" className="input-group-text btn-success"><i className="fa fa-search me-2"></i> Search</button>
                             </div>
                         </form>
 
