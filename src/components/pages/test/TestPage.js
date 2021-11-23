@@ -18,18 +18,18 @@ export default function HomePage()
             <ContainerLayout>
                 <ContainerContentRow>
                     <ContainerContent size="12" icon="home" title="home">
-                        Home Page
+                        <BasicComponent/>
                     </ContainerContent>
                 </ContainerContentRow>
 
 
                 <ContainerContentRow>
                     <ContainerContent size="6" icon="bitcoin" title="other">
-                        text1
+                        {data.letter}
                     </ContainerContent>
 
                     <ContainerContent size="6" icon="clipboard" title="info">
-                        Text2
+                        <InfoComponent/>
                     </ContainerContent>
 
                 </ContainerContentRow>

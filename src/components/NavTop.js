@@ -38,7 +38,7 @@ export default function NavTop()
                         <Link to="/hostels" className="dropdown-item text-center">Hostels</Link>
                     </li>
                     <li>
-                        <Link to="/hostels" className="dropdown-item text-center">Hostels</Link>
+                        <Link to="/test" className="dropdown-item text-center">Test</Link>
                     </li>
                 </ul>
             </div>
