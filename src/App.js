@@ -13,6 +13,7 @@ import HostelsPage from "./components/pages/hostels/HostelsPage";
 import NavTop from "./components/NavTop";
 import HomePage from "./components/pages/home/HomePage";
 import ToastBock from "./components/ToastBlock";
+import LoadingSpinner from "./components/LoadingSpinner";
 
 
 
@@ -27,6 +28,7 @@ export default function App()
                 <Route path="/" element={<HomePage />} />
                 <Route path="/hostels" element={<HostelsPage />} />
             </Routes>
+            <LoadingSpinner></LoadingSpinner>
 
         </span>
     );

@@ -21,19 +21,6 @@ export default function NavTop()
                 <img src="/images/logo.svg" width="30" height="30" className="d-inline-block align-top" alt="logo"/>Hostel Finder
             </Link>
 
-            <div className="fixed-bottom d-flex justify-content-center p-3">
-                {data.showSpinner ?
-                    <Loader
-                        type="Circles"
-                        color="#00BFFF"
-                        height={40}
-                        width={40}
-                        // timeout={9000} //3 secs
-                    />
-                    :
-                    <></>
-                }
-            </div>
 
 
 
