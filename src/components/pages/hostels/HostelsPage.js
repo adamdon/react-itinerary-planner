@@ -44,7 +44,7 @@ export default function HostelsPage()
 
     function handleFilterTextChange(e)
     {
-        let filterText = e.target.value;
+        let filterText = e.target.value.toLowerCase();
         console.log("handleFilterTextChange: " + filterText);
         if(filterText === "")
         {
@@ -52,9 +52,8 @@ export default function HostelsPage()
         }
         else
         {
-            let newItems = data.hostels.filter(hostel => (hostel.name + " " + hostel.description).includes(filterText));
-            console.log(data.hostels);
-            console.log(newItems);
+            let newItems = data.hostels.filter(hostel => (hostel.name.toLowerCase() + " " + hostel.description.toLowerCase() + " " + hostel.postcode.toLowerCase()).includes(filterText));
+
             setData({filteredHostels: newItems});
         }
     }
