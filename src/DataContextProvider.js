@@ -26,6 +26,8 @@ export default function DataContextProvider({children})
                 baseUrl: "http://localhost:3001",
             },
             hostels: [],
+            filteredHostels: [],
+            filterText: "",
             firstRun: true,
         }
         return data;
