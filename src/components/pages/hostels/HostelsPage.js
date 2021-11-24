@@ -3,6 +3,7 @@ import {useData} from "../../../DataContextProvider"
 import ContainerLayout from "../../containers/ContainerLayout";
 import ContainerContentRow from "../../containers/ContainerContentRow";
 import ContainerContent from "../../containers/ContainerContent";
+import HostelBox from "./HostelBox";
 
 
 
@@ -84,28 +85,9 @@ export default function HostelsPage()
                 </ContainerContentRow>
 
                 <ContainerContentRow>
-
-
-
                     {data.filteredHostels.map((hostel) => (
-
-                            <ContainerContent key={hostel.id} size="4" icon="hotel" title={hostel.name}>
-                                {hostel.description.substr(0, 300) + "..."}
-
-                                <div className="mt-2 text-center">
-                                    <div className="btn-group" role="group" aria-label="Basic mixed styles example">
-                                        <button type="button" className="btn btn-outline-light"><i className="fa fa-info-circle"></i> More Info</button>
-                                        <button type="button" className="btn btn-outline-light"><i className="fa fa-map"></i> View Map</button>
-                                        <button type="button" className="btn btn-outline-light"><i className="fa fa-address-card"></i> Contact</button>
-                                    </div>
-                                </div>
-
-                            </ContainerContent>
-
+                        <HostelBox  key={hostel.id} hostel={hostel}/>
                     ))}
-
-
-
                 </ContainerContentRow>
 
 

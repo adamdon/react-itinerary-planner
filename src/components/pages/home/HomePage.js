@@ -3,10 +3,7 @@ import ContainerLayout from "../../containers/ContainerLayout";
 import ContainerContentRow from "../../containers/ContainerContentRow";
 import ContainerContent from "../../containers/ContainerContent";
 import React from "react";
-import BasicComponent from "./BasicComponent";
-import HostelsPage from "../hostels/HostelsPage";
 import {useData} from "../../../DataContextProvider";
-import InfoComponent from "./InfoComponent";
 
 export default function HomePage()
 {
