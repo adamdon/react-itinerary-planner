@@ -65,15 +65,15 @@ export default function HostelsPage()
         <span>
             <ContainerLayout>
 
+
+
                 <ContainerContentRow>
                     <ContainerContent size="12" icon="search" title="Search">
 
                         <h4>Search for a hostel</h4>
-                        {/*<button onClick={fetchHostelData}>call</button>*/}
                         <p className="mb-3">
                             Find a hostel for your next trip by looking up the name or description
                         </p>
-
                         <form action="" className="">
                             <div className="input-group mb-3">
                                 <input type="text" className="form-control form-control-lg" placeholder="Search here" onChange={handleFilterTextChange}/>
@@ -84,11 +84,13 @@ export default function HostelsPage()
                     </ContainerContent>
                 </ContainerContentRow>
 
+
                 <ContainerContentRow>
                     {data.filteredHostels.map((hostel) => (
                         <HostelBox  key={hostel.id} hostel={hostel}/>
                     ))}
                 </ContainerContentRow>
+
 
 
             </ContainerLayout>
