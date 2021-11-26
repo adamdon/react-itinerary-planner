@@ -25,6 +25,18 @@ body
 }
 
 
+.silent-div
+{
+    padding:  -5px -5px -5px -5px !important;
+    margin:  0px 0px 0px 0px !important;
+    border:  0px !important;
+    display: inline !important;
+    /*width: fit-content;*/
+    /*width: 900px*/
+    /*display: block;*/
+}
+
+
 
 
 /*toast styles*/
@@ -66,15 +78,32 @@ body
 .col-xl-12
 {
     flex-grow: 1;
-    transition: all 4000ms ease;
+    transition: all 400ms ease;
+
+    /*transition: all 1.5s linear;*/
+    /*-o-transition: all 1.5s linear;*/
+    /*-moz-transition: all 1.5s linear;*/
+    /*-webkit-transition: all 1.5s linear;*/
 }
 
 .col-xl-6
 {
     flex-shrink: 1;
-    transition: all 4000ms ease;
+    transition: all 400ms ease;
+
+    /*transition: all 1.5s linear;*/
+    /*-o-transition: all 1.5s linear;*/
+    /*-moz-transition: all 1.5s linear;*/
+    /*-webkit-transition: all 1.5s linear;*/
 }
 
+
+/*.col-md-6.col-sm-12 {*/
+/*    transition: all 1.5s linear;*/
+/*    -o-transition: all 1.5s linear;*/
+/*    -moz-transition: all 1.5s linear;*/
+/*    -webkit-transition: all 1.5s linear;*/
+/*}*/
 
 
 
@@ -101,7 +130,7 @@ body
 
 
 /*!*collapse styles*!*/
-/*.collapse-hostel-box*/
-/*{*/
-/*    height:200px !important;*/
-/*}*/
+.collapse-content
+{
+    height:400px !important;
+}

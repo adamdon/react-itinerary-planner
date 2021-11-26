@@ -1,8 +1,13 @@
 export default function ContainerContent(props)
 {
+    let id = Math.floor(Math.random() * 10000000)
+    if(props.id)
+    {
+        id = props.id;
+    }
 
     return (
-        <div className={`col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-${props.size}`}>
+        <div className={`col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-${props.size}`} id={id}>
             <div className="content-container-fluid">
 
 
