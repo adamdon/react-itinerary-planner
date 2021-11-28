@@ -78,7 +78,7 @@ body
 .col-xl-12
 {
     flex-grow: 1;
-    transition: all 600ms ease;
+    transition: all 800ms ease;
 
     /*transition: all 1.5s linear;*/
     /*-o-transition: all 1.5s linear;*/
@@ -89,7 +89,7 @@ body
 .col-xl-6
 {
     flex-shrink: 1;
-    transition: all 600ms ease;
+    transition: all 800ms ease;
 
     /*transition: all 1.5s linear;*/
     /*-o-transition: all 1.5s linear;*/
