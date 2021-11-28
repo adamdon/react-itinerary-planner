@@ -75,7 +75,7 @@ export default function HostelsPage()
                         <p className="mb-3">
                             Find a hostel for your next trip by looking up the name or description
                         </p>
-                        <form action="" className="">
+                        <form action="" className="" onSubmit={e => e.preventDefault()}>
                             <div className="input-group mb-3">
                                 <input type="text" className="form-control form-control-lg" placeholder="Search here" onChange={handleFilterTextChange}/>
                                 <button type="submit" className="input-group-text btn-success"><i className="fa fa-search me-2"></i> Search</button>
