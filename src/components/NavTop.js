@@ -18,7 +18,7 @@ export default function NavTop()
         <nav className="navbar navbar-dark bg-primary p-0">
 
             <Link to="/" className="navbar-brand">
-                <img src="/images/logo.svg" width="30" height="30" className="d-inline-block align-top" alt="logo"/>Hostel Finder
+                &nbsp; <img src="/images/logo2.svg" width="30" height="30" className="d-inline-block align-top" alt="logo"/>&nbsp;Itinerary Planner
             </Link>
 
 

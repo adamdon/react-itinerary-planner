@@ -13,7 +13,7 @@ export default function DataContextProvider({children})
 {
     const [localData, setLocalData] = useState(() =>
     {
-        console.log("React DataContextProvider running...")
+        // console.log("React DataContextProvider running...")
         let data = {
             letter: "c",
             letter2: "x",

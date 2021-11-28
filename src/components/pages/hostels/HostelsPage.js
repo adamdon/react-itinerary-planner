@@ -28,7 +28,7 @@ export default function HostelsPage()
     async function fetchHostelData()
     {
         // setData({toastMessage: "componentDidMount"});
-        console.log("componentDidMount call");
+        // console.log("componentDidMount call");
 
         setData({showSpinner: true});
         const response = await fetch(data.config.baseUrl + "/hostels")

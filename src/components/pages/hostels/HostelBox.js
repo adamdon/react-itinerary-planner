@@ -55,29 +55,65 @@ export default function HostelBox(props)
         // <div className={"silent-div p-0 m-0 border-0"}>
             <ContainerContent key={props.hostel.id} id={props.index} size={size} icon="hotel" title={props.hostel.name}>
 
-                <Highlighter
-                    highlightClassName="highlightTextFilter"
-                    searchWords={[data.filterText]}
-                    autoEscape={false}
-                    textToHighlight={props.hostel.description.substr(0, 340) + "..."}
-                />
-                
 
+
+
+                <div className="collapse show collapse-hostel-box" id={"collapse" + props.hostel.id}>
+                    <div className="">
+                        <Highlighter
+                            highlightClassName="highlightTextFilter"
+                            searchWords={[data.filterText]}
+                            autoEscape={false}
+                            textToHighlight={props.hostel.description.substr(0, 340) + "..."}
+                        />
+                    </div>
+                </div>
 
 
 
 
                 <div className="collapse collapse-hostel-box" id={"collapse" + props.hostel.id}>
                     <div className="collapse-content">
-                        400px Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+                        {props.hostel.description}
+                        <table className="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">First</th>
+                                    <th scope="col">Last</th>
+                                    <th scope="col">Handle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">1</th>
+                                    <td>Mark</td>
+                                    <td>Otto</td>
+                                    <td>@mdo</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2</th>
+                                    <td>Jacob</td>
+                                    <td>Thornton</td>
+                                    <td>@fat</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">3</th>
+                                    <td colSpan="2">Larry the Bird</td>
+                                    <td>@twitter</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
 
 
+
+
                 <div className="mt-2 text-center">
                     <div className="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <button onClick={moreOnClick} data-bs-toggle="collapse" data-bs-target={"#collapse" + props.hostel.id} aria-expanded="false" aria-controls="collapseExample" type="button" className="btn btn-outline-light"><i className="fa fa-info-circle"></i> More Info</button>
+                        <button onClick={moreOnClick} data-bs-toggle="collapse" data-bs-target={"#collapse" + props.hostel.id} aria-expanded="false" type="button" className="btn btn-outline-light"><i className="fa fa-info-circle"></i> More Info</button>
                         <button type="button" className="btn btn-outline-light"><i className="fa fa-map"></i> View Map</button>
                         <button type="button" className="btn btn-outline-light"><i className="fa fa-address-card"></i> Contact</button>
                     </div>
