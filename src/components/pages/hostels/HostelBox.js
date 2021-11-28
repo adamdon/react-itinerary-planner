@@ -1,6 +1,7 @@
 import ContainerContent from "../../containers/ContainerContent";
 import React, {useState, useEffect} from "react";
 import ReactDOM from 'react-dom'
+import Highlighter from "react-highlight-words";
 import {useData} from "../../../DataContextProvider";
 
 
@@ -54,7 +55,17 @@ export default function HostelBox(props)
         // <div className={"silent-div p-0 m-0 border-0"}>
             <ContainerContent key={props.hostel.id} id={props.index} size={size} icon="hotel" title={props.hostel.name}>
 
-                {props.hostel.description.substr(0, 340) + "..."}
+                <Highlighter
+                    highlightClassName="highlightTextFilter"
+                    searchWords={[data.filterText]}
+                    autoEscape={false}
+                    textToHighlight={props.hostel.description.substr(0, 340) + "..."}
+                />
+                
+
+
+
+
 
                 <div className="collapse collapse-hostel-box" id={"collapse" + props.hostel.id}>
                     <div className="collapse-content">

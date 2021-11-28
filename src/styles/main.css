@@ -109,13 +109,32 @@ body
 
 
 
+/*text highlighter*/
+.highlightTextFilter
+{
+    background-color: orange;
+    padding: 0;
+}
+
+.mark
+{
+
+}
+
+
+
+
+
+
+
+
 /*for spinner*/
 .fadeOut
 {
     opacity:0;
     width:0;
     height:0;
-    transition: width 1.0s 1.0s, height 1.0s 1.0s, opacity 1.0s;
+    transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
 
 }
 

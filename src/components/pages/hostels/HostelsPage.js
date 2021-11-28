@@ -46,6 +46,7 @@ export default function HostelsPage()
     function handleFilterTextChange(e)
     {
         let filterText = e.target.value.toLowerCase();
+        setData({filterText: filterText});
         console.log("handleFilterTextChange: " + filterText);
         if(filterText === "")
         {
