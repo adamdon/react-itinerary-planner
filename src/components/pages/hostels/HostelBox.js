@@ -74,36 +74,47 @@ export default function HostelBox(props)
 
                 <div className="collapse collapse-hostel-box" id={"collapse" + props.hostel.id}>
                     <div className="collapse-content">
+
                         {props.hostel.description}
-                        <table className="table table-dark table-striped">
-                            <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First</th>
-                                    <th scope="col">Last</th>
-                                    <th scope="col">Handle</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">3</th>
-                                    <td colSpan="2">Larry the Bird</td>
-                                    <td>@twitter</td>
-                                </tr>
+
+                        <p>
+
+                        </p>
+
+
+                        <div className="table-responsive">
+                            <table className="table table-sm table-hover primary table-borderless rounded">
+                                <thead>
+                                    <tr className="table-active">
+                                        <th className="text-center text-light" colSpan={2}>Hostel Info</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr className="table-active">
+                                        <td  style={{width: "50%"}} className="text-end text-light">Phone <i className="fa fa-phone"></i> :</td>
+                                        <td style={{width: "50%"}} className="text-start text-light">{props.hostel.phone}</td>
+
+                                    </tr>
+                                    <tr className="table-active">
+                                        <td  style={{width: "50%"}} className="text-end text-light">Email <i className="fa fa-at"></i> :</td>
+                                        <td style={{width: "50%"}} className="text-start text-light">{props.hostel.email}</td>
+                                    </tr>
+
+                                    <tr className="table-active">
+                                        <td  style={{width: "50%"}} className="text-end text-light">Address <i className="fa fa-road"></i> :</td>
+                                        <td style={{width: "50%"}} className="text-start text-light">{props.hostel.address}</td>
+                                    </tr>
+
+                                    <tr className="table-active">
+                                        <td  style={{width: "50%"}} className="text-end text-light">Postcode <i className="fa fa-envelope"></i> :</td>
+                                        <td style={{width: "50%"}} className="text-start text-light">{props.hostel.postcode}</td>
+                                    </tr>
+
+
                             </tbody>
                         </table>
+                    </div>
+
                     </div>
                 </div>
 
