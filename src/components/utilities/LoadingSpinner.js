@@ -1,5 +1,5 @@
 import Loader from "react-loader-spinner";
-import {useData} from "../DataContextProvider";
+import {useData} from "../data/DataContextProvider";
 
 
 export default function LoadingSpinner()

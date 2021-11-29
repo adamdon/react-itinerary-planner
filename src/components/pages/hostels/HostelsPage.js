@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import {useData} from "../../../DataContextProvider"
+import {useData} from "../../data/DataContextProvider"
 import ContainerLayout from "../../containers/ContainerLayout";
 import ContainerContentRow from "../../containers/ContainerContentRow";
 import ContainerContent from "../../containers/ContainerContent";

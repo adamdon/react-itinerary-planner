@@ -2,7 +2,7 @@ import ContainerContent from "../../containers/ContainerContent";
 import React, {useState, useEffect} from "react";
 import ReactDOM from 'react-dom'
 import Highlighter from "react-highlight-words";
-import {useData} from "../../../DataContextProvider";
+import {useData} from "../../data/DataContextProvider";
 
 
 export default function HostelBox(props)

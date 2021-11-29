@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import Loader from "react-loader-spinner";
 
 
-import {useData} from "../DataContextProvider";
+import {useData} from "./data/DataContextProvider";
 
 
 

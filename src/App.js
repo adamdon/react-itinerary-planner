@@ -13,8 +13,8 @@ import HostelsPage from "./components/pages/hostels/HostelsPage";
 import NavTop from "./components/NavTop";
 import HomePage from "./components/pages/home/HomePage";
 import TestPage from "./components/pages/test/TestPage";
-import ToastBock from "./components/ToastBlock";
-import LoadingSpinner from "./components/LoadingSpinner";
+import ToastBock from "./components/utilities/ToastBlock";
+import LoadingSpinner from "./components/utilities/LoadingSpinner";
 
 
 

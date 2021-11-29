@@ -5,7 +5,7 @@ import ContainerContent from "../../containers/ContainerContent";
 import React from "react";
 import BasicComponent from "./BasicComponent";
 import HostelsPage from "../hostels/HostelsPage";
-import {useData} from "../../../DataContextProvider";
+import {useData} from "../../data/DataContextProvider";
 import InfoComponent from "./InfoComponent";
 
 export default function HomePage()
