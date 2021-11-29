@@ -3,6 +3,7 @@ import React, {useState, useEffect} from "react";
 import ReactDOM from 'react-dom'
 import Highlighter from "react-highlight-words";
 import {useData} from "../../data/DataContextProvider";
+import MapBox from "./MapBox";
 
 
 export default function HostelBox(props)
@@ -13,7 +14,7 @@ export default function HostelBox(props)
 
     useEffect(() =>
     {
-        console.log("useEffect");
+        // console.log("useEffect");
 
     }, []);
 
@@ -67,6 +68,7 @@ export default function HostelBox(props)
                             textToHighlight={props.hostel.description.substr(0, 340) + "..."}
                         />
                     </div>
+                    <MapBox hostel={props.hostel}/>
                 </div>
 
 
@@ -77,13 +79,8 @@ export default function HostelBox(props)
 
                         {props.hostel.description}
 
-                        <p>
+                        <div className="border-top border-secondary my-3 mx-0 px-3"></div> {/*---------divider ---------*/}
 
-                        </p>
-
-                        {/*<div className="bg-danger text-center">*/}
-                        {/*    <div className="bg-dark d-inline-block">text1</div>*/}
-                        {/*</div>*/}
 
 
                         <div className="text-center">
@@ -118,7 +115,13 @@ export default function HostelBox(props)
 
                             </tbody>
                         </table>
-                    </div>
+
+                            <div className="border-top border-secondary my-3 mx-0 px-3"></div> {/*---------divider ---------*/}
+
+                            {/*<MapBox/>*/}
+
+
+                        </div>
 
                     </div>
                 </div>
