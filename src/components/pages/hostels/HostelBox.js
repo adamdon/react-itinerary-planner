@@ -6,6 +6,7 @@ import {useData} from "../../data/DataContextProvider";
 import MapBox from "./MapBox";
 
 
+
 export default function HostelBox(props)
 {
     const [size, setSize] = useState(6);
@@ -69,6 +70,7 @@ export default function HostelBox(props)
                         />
                     </div>
                     <MapBox hostel={props.hostel}/>
+
                 </div>
 
 
@@ -79,13 +81,12 @@ export default function HostelBox(props)
 
                         {props.hostel.description}
 
+
                         <div className="border-top border-secondary my-3 mx-0 px-3"></div> {/*---------divider ---------*/}
 
 
-
                         <div className="text-center">
-
-                            <table className="table table-sm table-hover bg-primary table-borderless table-fit d-inline-block">
+                            <table className="table table-sm table-hover bg-primary table-borderless table-fit d-inline-block m-0">
                                 <thead>
                                     <tr className="table-active">
                                         <th className="text-center text-light" colSpan={2}>Hostel Info</th>
@@ -111,17 +112,12 @@ export default function HostelBox(props)
                                         <td className="text-end text-light px-3">Postcode <i className="fa fa-envelope"></i> :</td>
                                         <td className="text-start text-light px-3">{props.hostel.postcode}</td>
                                     </tr>
-
-
-                            </tbody>
-                        </table>
-
-                            <div className="border-top border-secondary my-3 mx-0 px-3"></div> {/*---------divider ---------*/}
-
-                            {/*<MapBox/>*/}
-
-
+                                </tbody>
+                            </table>
                         </div>
+
+                        <div className="border-top border-secondary my-3 mx-0 px-3"></div> {/*---------divider ---------*/}
+
 
                     </div>
                 </div>

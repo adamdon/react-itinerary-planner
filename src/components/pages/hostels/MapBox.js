@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {useData} from "../../data/DataContextProvider";
 import L from 'leaflet';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMap} from 'react-leaflet'
 import 'leaflet/dist/leaflet.css';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
@@ -43,9 +43,11 @@ export default function MapBox(props)
 
     return (
 
-            <MapContainer className="map-container" center={[props.hostel.location.lat, props.hostel.location.long]} zoom={13} scrollWheelZoom={false}>
+        <div className="w-100">
+            <MapContainer className="map-container" center={[props.hostel.location.lat, props.hostel.location.long]} attributionControl={false} zoom={13} scrollWheelZoom={false}>
                 <TileLayer
-                    attribution='Maybe put an attribution here'
+                    attributionControl="false"
+                    attribution=''
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker position={[props.hostel.location.lat, props.hostel.location.long]}>
@@ -54,6 +56,8 @@ export default function MapBox(props)
                     </Popup>
                 </Marker>
             </MapContainer>
+        </div>
+
 
 
     );

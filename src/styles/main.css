@@ -189,8 +189,7 @@ table.table-fit tbody td, table.table-fit tfoot td {
 
 /*Map container*/
 .map-container{
-    width: 400px;
-    height: 400px;
+    height: 200px;
 }
 
 
