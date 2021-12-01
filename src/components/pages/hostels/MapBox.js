@@ -38,7 +38,20 @@ export default function MapBox(props)
     return (
 
         <div className="w-100">
-            <MapContainer className="map-container" center={[props.hostel.location.lat, props.hostel.location.long]} attributionControl={false} zoom={13} scrollWheelZoom={false}>
+            <MapContainer className="map-container"
+                          center={[props.hostel.location.lat, props.hostel.location.long]}
+                          attributionControl={false}
+                          zoom={13}
+                          scrollWheelZoom={false}
+                          touchZoom={false}
+                          doubleClickZoom={false}
+                          closePopupOnClick={false}
+                          dragging={false}
+                          zoomSnap={false}
+                          zoomDelta={false}
+                          zoomControl={false}
+                          trackResize={false}
+            >
                 <TileLayer
                     attributionControl="false"
                     attribution=''
