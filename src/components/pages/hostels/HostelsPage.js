@@ -33,10 +33,10 @@ export default function HostelsPage()
         setData({showSpinner: true});
         const response = await fetch(data.config.baseUrl + "/hostels")
         const json = await response.json();
+        // console.log(json);
 
         await new Promise(resolve => setTimeout(resolve, 1000));
         setData({showSpinner: false});
-        console.log(json);
         setData({hostels: json, filteredHostels: json});
     }
 

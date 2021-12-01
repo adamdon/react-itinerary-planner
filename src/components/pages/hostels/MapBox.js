@@ -28,19 +28,13 @@ export default function MapBox(props)
     });
 
 
-    useEffect(() =>
-    {
-        console.log("useEffect");
+    // useEffect(() =>
+    // {
+    //     console.log("useEffect");
+    //
+    // }, []);
 
-    }, []);
-
-
-    function moreOnClick()
-    {
-
-
-    }
-
+    
     return (
 
         <div className="w-100">
