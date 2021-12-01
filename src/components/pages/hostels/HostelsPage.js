@@ -27,17 +27,30 @@ export default function HostelsPage()
 
     async function fetchHostelData()
     {
-        // setData({toastMessage: "componentDidMount"});
-        // console.log("componentDidMount call");
-
         setData({showSpinner: true});
-        const response = await fetch(data.config.baseUrl + "/hostels")
-        const json = await response.json();
-        // console.log(json);
-
         await new Promise(resolve => setTimeout(resolve, 1000));
+
+
+        // let requestBody = {};
+        let methodType = "GET"
+        let requestUrl = (data.config.baseUrl + "/hostels");
+        let requestHeaders = {"Content-Type": "application/json"};
+
+        const response = await fetch(requestUrl, {method: methodType, headers: requestHeaders});
+        // const response = await fetch(requestUrl, {method: methodType, headers: requestHeaders, body: JSON.stringify(requestBody)});
+
+        if(response.status === 200)
+        {
+            const jsonData = await response.json();
+            setData({toastMessage: "Hostels loaded", hostels: jsonData, filteredHostels: jsonData});
+        }
+        else
+        {
+            setData({toastError: "Error: " + response.status + " - Could not load"});
+        }
+
+
         setData({showSpinner: false});
-        setData({hostels: json, filteredHostels: json});
     }
 
 
