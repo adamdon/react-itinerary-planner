@@ -98,7 +98,7 @@ export default function ToastBock()
                 {
                     animation: true,
                     autohide: true,
-                    delay: 10000,
+                    delay: 3000,
 
                 };
             let bootstrapToast = new Toast(toastDiv, toastOptions);

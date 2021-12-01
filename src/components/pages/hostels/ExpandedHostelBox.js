@@ -12,7 +12,9 @@ export default function ExpandedHostelBox(props)
 
         <div className="collapse collapse-hostel-box collapse-content" id={"collapse" + props.hostel.id}>
 
-            {props.hostel.description}
+            <div className={"alert bg-secondary"}>
+                {props.hostel.description}
+            </div>
 
 
             <div className="border-top border-secondary my-3 mx-0 px-3"></div> {/*---------divider ---------*/}

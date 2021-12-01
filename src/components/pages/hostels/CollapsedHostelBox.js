@@ -12,12 +12,12 @@ export default function CollapsedHostelBox(props)
     return (
 
         <div className="collapse show collapse-hostel-box" id={"collapse" + props.hostel.id}>
-            <div className="">
+            <div className="alert bg-secondary">
                 <Highlighter
                     highlightClassName="highlightTextFilter"
                     searchWords={[data.filterText]}
                     autoEscape={false}
-                    textToHighlight={props.hostel.description.substr(0, 340) + "..."}
+                    textToHighlight={props.hostel.description.substr(0, 320) + "..."}
                 />
             </div>
             <MapBox hostel={props.hostel}/>

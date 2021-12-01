@@ -151,7 +151,7 @@ body
 /*!*collapse styles*/
 .collapse-content
 {
-    height:400px !important;
+    /*height:400px !important;*/
 }
 
 
@@ -190,6 +190,17 @@ table.table-fit tbody td, table.table-fit tfoot td {
 /*Map container*/
 .map-container{
     height: 200px;
+}
+
+
+
+
+.simplebar-content {
+    overflow-x: hidden;
+}
+
+.simplebar-track.simplebar-horizontal {
+    display: none;
 }
 
 
