@@ -14,7 +14,7 @@ export default function LoadingSpinner()
         <div className=" align-center  position-fixed bottom-0 start-50 translate-middle-x p-3">
             <div className={data.showSpinner ? 'fadeIn' : 'fadeOut' }>
                 <Loader
-                    type="Watch"
+                    type="TailSpin"
                     color="orange"
                     height={40}
                     width={40}

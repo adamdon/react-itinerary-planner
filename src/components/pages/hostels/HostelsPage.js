@@ -43,6 +43,7 @@ export default function HostelsPage()
         {
             const jsonData = await response.json();
             setData({toastMessage: "Hostels loaded", hostels: jsonData, filteredHostels: jsonData});
+            console.log(jsonData);
         }
         else
         {

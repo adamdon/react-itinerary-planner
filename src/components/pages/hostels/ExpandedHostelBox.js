@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from "react";
 import {useData} from "../../data/DataContextProvider";
-import Highlighter from "react-highlight-words";
-import MapBox from "./MapBox";
+import ViewReviews from "./ViewReviews";
 
 export default function ExpandedHostelBox(props)
 {
@@ -51,6 +50,9 @@ export default function ExpandedHostelBox(props)
             </div>
 
             <div className="border-top border-secondary my-3 mx-0 px-3"></div> {/*---------divider ---------*/}
+
+            <ViewReviews/>
+
         </div>
 
     );
