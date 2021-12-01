@@ -41,7 +41,7 @@ export default function MapBox(props)
             <MapContainer className="map-container"
                           center={[props.hostel.location.lat, props.hostel.location.long]}
                           attributionControl={false}
-                          zoom={13}
+                          zoom={14}
                           scrollWheelZoom={false}
                           touchZoom={false}
                           doubleClickZoom={false}
@@ -59,7 +59,7 @@ export default function MapBox(props)
                 />
                 <Marker position={[props.hostel.location.lat, props.hostel.location.long]}>
                     <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
+                        {props.hostel.name}
                     </Popup>
                 </Marker>
             </MapContainer>
