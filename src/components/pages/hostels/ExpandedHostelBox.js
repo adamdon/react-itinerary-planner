@@ -57,7 +57,7 @@ export default function ExpandedHostelBox(props)
 
             <div className="border-top border-secondary my-3 mx-0 px-3"></div> {/*---------divider ---------*/}
 
-            <AddReview hostel={props.hostel}/>
+            <AddReview hostel={props.hostel} fetchHostelData={() => props.fetchHostelData()}/>
 
             <ViewReviews hostel={props.hostel}/>
 

@@ -70,7 +70,12 @@ export default function HostelsPage()
 
                 <ContainerContentRow>
                     {data.filteredHostels.map((hostel) => (
-                        <HostelBox key={hostel.id} index={data.filteredHostels.indexOf(hostel) + 1} hostel={hostel}/>
+                        <HostelBox
+                            key={hostel.id}
+                            index={data.filteredHostels.indexOf(hostel) + 1}
+                            hostel={hostel}
+                            fetchHostelData = {() => fetchHostelData()}
+                        />
                     ))}
                 </ContainerContentRow>
 

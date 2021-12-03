@@ -58,7 +58,9 @@ export default function AddReview(props)
         {
             const jsonData = await response.json();
             // setData((oldData) => ({...oldData, hostels: (oldData.hostels[oldData.hostels.indexOf(props.hostel)].reviews.push(requestBody))}));
-
+            await props.fetchHostelData();
+            setReviewer("");
+            setReview("");
             setData({toastSuccess: "Review Added"});
         }
         else

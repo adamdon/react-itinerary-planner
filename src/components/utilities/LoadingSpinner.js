@@ -10,7 +10,7 @@ export default function LoadingSpinner()
 
     useEffect(() =>
     {
-        console.log("showSpinner change!!")
+        // console.log("showSpinner change!!")
         if(data.showSpinner)
         {
             setSpinning(true)

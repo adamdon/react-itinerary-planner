@@ -44,7 +44,7 @@ export default function HostelBox(props)
 
                 {/*more info expand details */}
 
-                <ExpandedHostelBox hostel={props.hostel}/>
+                <ExpandedHostelBox hostel={props.hostel} fetchHostelData={() => props.fetchHostelData()}/>
 
 
 
