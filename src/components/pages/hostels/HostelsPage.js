@@ -38,10 +38,10 @@ export default function HostelsPage()
         const response = await fetch(requestUrl, {method: methodType, headers: requestHeaders});
         // const response = await fetch(requestUrl, {method: methodType, headers: requestHeaders, body: JSON.stringify(requestBody)});
 
-        if(response.status === 200)
+        if(Number(response.status.toString().substring(0, 1)) === 2)
         {
             const jsonData = await response.json();
-            setData({toastMessage: "Hostels loaded", hostels: jsonData, filteredHostels: jsonData});
+            setData({hostels: jsonData, filteredHostels: jsonData});
             console.log(jsonData);
         }
         else

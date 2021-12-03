@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import {useData} from "../../data/DataContextProvider";
 import ViewReviews from "./ViewReviews";
+import AddReview from "./AddReview";
 
 export default function ExpandedHostelBox(props)
 {
@@ -53,7 +54,13 @@ export default function ExpandedHostelBox(props)
 
             <div className="border-top border-secondary my-3 mx-0 px-3"></div> {/*---------divider ---------*/}
 
+
+            <div className="border-top border-secondary my-3 mx-0 px-3"></div> {/*---------divider ---------*/}
+
+            <AddReview hostel={props.hostel}/>
+
             <ViewReviews hostel={props.hostel}/>
+
 
         </div>
 
