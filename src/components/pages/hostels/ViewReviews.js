@@ -14,8 +14,10 @@ export default function ViewReviews(props)
 
 
     return (
-    <SimpleBar className={"simplebar-content"} forceVisible="y" autoHide={false} style={{maxHeight: 200}}>
-        <div className={"alert bg-secondary simplebar-content"}>
+    <SimpleBar className={"alert bg-secondary simplebar-content"} forceVisible="y" autoHide={false} style={{height: 200}} >
+        {/*<div className={"alert bg-secondary simplebar-content"} style={{height: 150}}>*/}
+        <div style={{height: 200}}>
+
 
             <span><h6><i className={"fa fa-comments"}></i> Reviews ({props.hostel.reviews.length})</h6></span>
 
@@ -34,8 +36,8 @@ export default function ViewReviews(props)
                     </span>
                 </div>
             ))}
-
         </div>
+        {/*</div>*/}
     </SimpleBar>
 
     );

@@ -13,7 +13,7 @@ export default function ExpandedHostelBox(props)
 
         <div className="collapse collapse-hostel-box collapse-content" id={"collapse" + props.hostel.id}>
 
-            <div className={"alert bg-secondary"}>
+            <div className={"alert bg-secondary"} style={{height: 150}}>
                 {props.hostel.description}
             </div>
 
@@ -51,8 +51,6 @@ export default function ExpandedHostelBox(props)
                     </tbody>
                 </table>
             </div>
-
-            <div className="border-top border-secondary my-3 mx-0 px-3"></div> {/*---------divider ---------*/}
 
 
             <div className="border-top border-secondary my-3 mx-0 px-3"></div> {/*---------divider ---------*/}
