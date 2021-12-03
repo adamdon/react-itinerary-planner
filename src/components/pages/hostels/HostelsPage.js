@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import { createClient } from 'pexels';
 import {useData} from "../../data/DataContextProvider"
 import ContainerLayout from "../../containers/ContainerLayout";
 import ContainerContentRow from "../../containers/ContainerContentRow";
@@ -51,6 +52,36 @@ export default function HostelsPage()
 
 
         setData({showSpinner: false});
+        await fetchImageData();
+    }
+
+    async function fetchImageData()
+    {
+        console.log("!!!!!!!!!!!!fetchImageData!!!!!!!!!!!!!!!!!!")
+
+        let searchParams = {
+            query: "nature",
+            per_page: 80
+        }
+        let pexelsClient = createClient(data.config.pexelsApiKey);
+        let pexelsData = await pexelsClient.photos.search(searchParams);
+        let photos = pexelsData.photos;
+        console.log(photos);
+
+
+
+
+        // .then(photos => {console.log(photos)});
+        // const photos = await client.photos.search({ query, per_page: 1 });
+
+
+            // .then(photos => {console.log(photos)});
+
+
+
+        console.log("!!!!!!!!!!!!fetchImageData!!!!!!!!!!!!!!!!!!")
+
+
     }
 
 
