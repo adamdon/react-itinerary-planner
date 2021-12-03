@@ -32,7 +32,7 @@ export default function HostelsSearch()
         }
         else
         {
-            let newItems = data.hostels.filter(hostel => (hostel.name.toLowerCase() + " " + hostel.description.toLowerCase() + " " + hostel.postcode.toLowerCase()).includes(filterText));
+            let newItems = data.hostels.filter(hostel => (hostel.name.toLowerCase() + " " + hostel.description.toLowerCase() + " " + hostel.postcode.toLowerCase() + " " + hostel.address.toLowerCase()).includes(filterText));
 
             setData({filteredHostels: newItems});
         }
@@ -46,7 +46,7 @@ export default function HostelsSearch()
 
                 <h4>Search for a hostel</h4>
                 <p className="mb-3">
-                    Find a hostel for your next trip by looking up the name or description
+                    Find a hostel for your next trip by looking up the name, description, address or postcode.
                 </p>
                 <form action="" className="" onSubmit={e => e.preventDefault()}>
                     <div className="input-group mb-3">
