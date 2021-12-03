@@ -50,38 +50,23 @@ export default function HostelsPage()
             setData({toastError: "Error: " + response.status + " - Could not load"});
         }
 
-
-        setData({showSpinner: false});
         await fetchImageData();
+        setData({showSpinner: false});
     }
 
     async function fetchImageData()
     {
         console.log("!!!!!!!!!!!!fetchImageData!!!!!!!!!!!!!!!!!!")
-
         let searchParams = {
-            query: "nature",
+            query: "nature, scotland",
             per_page: 80
         }
         let pexelsClient = createClient(data.config.pexelsApiKey);
         let pexelsData = await pexelsClient.photos.search(searchParams);
-        let photos = pexelsData.photos;
-        console.log(photos);
-
-
-
-
-        // .then(photos => {console.log(photos)});
-        // const photos = await client.photos.search({ query, per_page: 1 });
-
-
-            // .then(photos => {console.log(photos)});
-
-
-
+        let photosJson = pexelsData.photos;
+        console.log(photosJson);
+        setData({photos: photosJson})
         console.log("!!!!!!!!!!!!fetchImageData!!!!!!!!!!!!!!!!!!")
-
-
     }
 
 

@@ -78,12 +78,12 @@ export default function AddReview(props)
 
 
     return (
-            <div className={"alert bg-secondary simplebar-content"}>
+            <div className={"alert bg-secondary simplebar-content mt-3"}>
 
                 <span><h6><i className={"fa fa-comment"}></i> Add Review</h6></span>
 
                 <div className="input-group">
-                    <span className="input-group-text">New Review</span>
+                    <span className="input-group-text">Add</span>
 
                     <input value={reviewer} onChange={e => setReviewer(e.target.value)} onKeyDown={handleKeyDown} disabled={disabled} placeholder="Name" type="text" aria-label="reviewer" id={"reviewer_" + props.hostel.id} className="form-control w-10" />
                     <input value={review} onChange={e => setReview(e.target.value)} onKeyDown={handleKeyDown} disabled={disabled} placeholder="Comment" type="text" aria-label="review" id={"review"} className="form-control w-50"/>

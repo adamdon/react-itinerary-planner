@@ -26,6 +26,7 @@ export default function DataContextProvider({children})
                 pexelsApiKey: ("563492ad6f9170000100000151" + "dafa4f65b54cb2b8e208e3c4d7395" + (3 - 2).toString()),
                 baseUrl: "http://localhost:3001",
             },
+            photos: [],
             hostels: [],
             filteredHostels: [],
             filterText: "",
