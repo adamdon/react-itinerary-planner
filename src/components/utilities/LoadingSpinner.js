@@ -17,7 +17,7 @@ export default function LoadingSpinner()
         }
         else
         {
-            new Promise(resolve => setTimeout(resolve, 1000)).then(() => setSpinning(false));
+            new Promise(resolve => setTimeout(resolve, 1500)).then(() => setSpinning(false));
         }
     }, [data.showSpinner, setSpinning]);
 
@@ -30,7 +30,7 @@ export default function LoadingSpinner()
         <div className=" align-center  position-fixed bottom-0 start-50 translate-middle-x p-3">
             <div className={isSpinning ? 'fadeIn' : 'fadeOut' }>
                 <Loader
-                    type="TailSpin"
+                    type="Grid"
                     color="orange"
                     height={40}
                     width={40}
