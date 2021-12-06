@@ -17,7 +17,7 @@ export default function Info(props)
 
     return (
             // <div className="text-center rounded-3 py-3" style={{backgroundImage: `url('https://random.dog/428711bd-7381-4998-a4b5-47b682c95b1b.jpg')`}}>
-                <div className="text-center rounded-3 py-3" style={{backgroundImage: `url('${data.photos[props.hostel.id].src.landscape}')`}}>
+                <div className="text-center rounded-3 py-3 mb-3" style={{backgroundImage: `url('${data.photos[props.hostel.id].src.landscape}')`}}>
                 <table className="table table-sm table-hover bg-primary table-borderless table-fit d-inline-block m-0 pb-1 rounded-3">
                     <thead>
                         <tr className="table-active">

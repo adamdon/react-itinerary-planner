@@ -13,12 +13,14 @@ export default function ExpandedHostelBox(props)
     return (
         <div className="collapse collapse-content" id={"collapse" + props.hostel.id}>
 
+            <Info hostel={props.hostel}/>
+
+
             <div className={"alert bg-secondary"} style={{minHeight: 150}}>
                 {props.hostel.description}
             </div>
 
 
-            <Info hostel={props.hostel}/>
 
             <AddReview hostel={props.hostel} fetchHostelData={() => props.fetchHostelData()}/>
 

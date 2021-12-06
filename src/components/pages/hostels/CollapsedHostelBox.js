@@ -12,7 +12,8 @@ export default function CollapsedHostelBox(props)
     return (
 
         <div className="collapse show" id={"collapse" + props.hostel.id}>
-            <div className="alert bg-secondary bg-gradient" style={{height: 150}}>
+            {/*<div className="alert bg-secondary bg-gradient" style={{height: 150}}>*/}
+            <div className="alert bg-secondary" style={{height: 150}}>
                 <Highlighter
                     highlightClassName="highlightTextFilter"
                     searchWords={[data.filterText]}

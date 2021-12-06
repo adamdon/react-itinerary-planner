@@ -43,7 +43,7 @@ export default function HostelsPage()
         {
             const jsonData = await response.json();
             setData({hostels: jsonData, filteredHostels: jsonData});
-            console.log(jsonData);
+            // console.log(jsonData);
         }
         else
         {
@@ -56,7 +56,6 @@ export default function HostelsPage()
 
     async function fetchImageData()
     {
-        console.log("!!!!!!!!!!!!fetchImageData!!!!!!!!!!!!!!!!!!")
         let searchParams = {
             query: "nature, scotland",
             per_page: 80
@@ -64,9 +63,8 @@ export default function HostelsPage()
         let pexelsClient = createClient(data.config.pexelsApiKey);
         let pexelsData = await pexelsClient.photos.search(searchParams);
         let photosJson = pexelsData.photos;
-        console.log(photosJson);
+        // console.log(photosJson);
         setData({photos: photosJson})
-        console.log("!!!!!!!!!!!!fetchImageData!!!!!!!!!!!!!!!!!!")
     }
 
 
