@@ -11,7 +11,7 @@ export default function ExpandedHostelBox(props)
 
 
     return (
-        <div className="collapse collapse-hostel-box collapse-content" id={"collapse" + props.hostel.id}>
+        <div className="collapse collapse-content" id={"collapse" + props.hostel.id}>
 
             <div className={"alert bg-secondary"} style={{minHeight: 150}}>
                 {props.hostel.description}
