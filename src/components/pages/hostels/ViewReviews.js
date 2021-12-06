@@ -14,7 +14,7 @@ export default function ViewReviews(props)
 
 
     return (
-        <div className={""} style={{height: 200}}>
+        <div className={"mb-3"} style={{height: 200}}>
 
     <SimpleBar className={"alert bg-secondary"} forceVisible={true} autoHide={false} style={{height: 200} }>
         {/*<div className={"alert bg-secondary simplebar-content"} style={{height: 150}}>*/}
