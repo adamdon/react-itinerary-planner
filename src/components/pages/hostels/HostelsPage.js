@@ -43,7 +43,7 @@ export default function HostelsPage()
         {
             const jsonData = await response.json();
             setData({hostels: jsonData, filteredHostels: jsonData});
-            // console.log(jsonData);
+            console.log(jsonData);
         }
         else
         {
