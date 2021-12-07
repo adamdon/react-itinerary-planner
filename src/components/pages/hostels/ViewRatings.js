@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, LabelList} from 'recharts';
 import { Rating } from 'react-simple-star-rating'
 
 import {useData} from "../../data/DataContextProvider"
@@ -13,7 +13,13 @@ import data from "bootstrap/js/src/dom/data";
 export default function ViewRatings(props)
 {
     const [data, setData] = useData();
+    const [disabled, setDisabled] = useState(false);
     const [chartData, setChartData] = useState(formatChartData(props.hostel.ratings));
+
+    useEffect( () =>
+    {
+        console.log('data.hostels');
+    }, [data.hostels]);
 
 
     // if(props.hostel.id === "2")
@@ -89,37 +95,43 @@ export default function ViewRatings(props)
 
     async function ratingOnClick(ratingNumber)
     {
+        setDisabled(true);
+        setData({showSpinner: true});
+
+
         let starNumber = (ratingNumber / 20);
-        console.log("ratingOnClick " + starNumber);
+        props.hostel.ratings.push(starNumber);
+        setChartData(formatChartData(props.hostel.ratings)); //local change only
+
+
+        ////////////////////////////////////////////////////////////////////fetch
+        // let requestBody = {reviewer: reviewer, review: review};
+        let methodType = "GET"
+        let requestUrl = (data.config.baseUrl + "/hostels/rate/" + props.hostel.id + "/" + starNumber.toString());
+        let requestHeaders = {"Content-Type": "application/json"};
+
+        // const response = await fetch(requestUrl, {method: methodType, headers: requestHeaders, body: JSON.stringify(requestBody)});
+        const response = await fetch(requestUrl, {method: methodType, headers: requestHeaders});
+
+        if(Number(response.status.toString().substring(0, 1)) === 2) //check response code starts with 2
+        {
+            const jsonData = await response.json();
+            // await props.fetchHostelData();
+
+            console.log(jsonData);
+            setData({toastSuccess: "Rating Added"});
+        }
+        else
+        {
+            setData({toastError: "Error: " + response.status + " - Could not action"});
+        }
+        //////////////////////////////////////////////////////////////////////fetch
+
+
+
+        setData({showSpinner: false});
+        setDisabled(false);
     }
-
-
-
-
-
-
-    // const data2 = [
-    //     {
-    //         Stars: '⭐',
-    //         Percentage: 10,
-    //     },
-    //     {
-    //         Stars: '⭐⭐',
-    //         Percentage: 0,
-    //     },
-    //     {
-    //         Stars: '⭐⭐⭐',
-    //         Percentage: 0,
-    //     },
-    //     {
-    //         Stars: '⭐⭐⭐⭐',
-    //         Percentage: 50,
-    //     },
-    //     {
-    //         Stars: '⭐⭐⭐⭐⭐',
-    //         Percentage: 40,
-    //     },
-    // ];
 
 
 
@@ -137,7 +149,7 @@ export default function ViewRatings(props)
                             top: 20,
                             right: 20,
                             left: 0,
-                            bottom: 40,
+                            bottom: 0,
                         }}
                     >
                         <CartesianGrid strokeDasharray="5 5" />
@@ -145,25 +157,53 @@ export default function ViewRatings(props)
                         <YAxis domain={[0, 100]} tick={{ fill: 'white' }} stroke="#efefef"/>
                         <Tooltip itemStyle={{color: "#000000"}} className={'bg-secondary'} />
                         <Legend  tick={{ fill: 'red' }} font={"red"} />
-                        <Bar dataKey="Percentage"  fill="#FFFFFF" radius={5} />
+                        <Bar dataKey="Percentage"  fill="#FFFFFF" radius={5} label={<CustomizedLabel/>}>
+                            {/*<LabelList dataKey="Percentage" position="inside" style={{fill: "#000000"}} />*/}
+                            {/*<LabelList dataKey="Percentage" position="inside" style={{fill: "#000000"}}>%</LabelList>*/}
+                        </Bar>
                         {/*<Bar dataKey="Percentage"  background={{ fill: 'red' }} fill="#131c29" radius={5} />*/}
                         {/*<Bar dataKey="uv" fill="#82ca9d" />*/}
                     </BarChart>
                 </ResponsiveContainer>
             </div>
 
+            <div className={''}>
+                <Rating
+                    onClick={ratingOnClick}
+                    showTooltip
+                    transition
+                    allowHover={!disabled}
+                    readonly={disabled}
+                    tooltipArray={['1 Stars', '2 Stars', '3 Stars', '4 Stars', '5 Stars']}
+                />
+            </div>
 
 
-            <Rating
-                onClick={ratingOnClick}
-                showTooltip
-                tooltipArray={['1', '2', '3', '4', '5']}
-            />
+
+
 
 
         </div>
 
     );
+}
+
+
+function CustomizedLabel(props)
+{
+    const {x, y, value} = props;
+
+
+        return <text
+            x={x}
+            y={y}
+            dy={-6}
+            fontSize='16'
+            fontFamily='sans-serif'
+            fill={"#FFFFFF"}
+            textAnchor="center">{value}%
+        </text>
+
 }
 
 
