@@ -76,7 +76,7 @@ export default function ItinerariesPage(props)
 
 
                 <ContainerContentRow>
-                    <AddItinerary/>
+                    <AddItinerary fetchItinerariesData={() => fetchItinerariesData()}/>
                 </ContainerContentRow>
 
 
