@@ -29,7 +29,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "concurrently \"cd backend && npm run start\" \"npm run clientStart\"",
+    "start": "concurrently \"npm run clientStart\" \"cd backend && npm install && npm run start\" ",
     "dev": "concurrently \"cd backend && npm run start\" \"npm run clientStart\"",
     "devMac": "concurrently \"cd backend && npm run start\" \"npm run clientStartMac\"",
     "clientStart": "react-scripts start",
