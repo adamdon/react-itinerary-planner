@@ -248,13 +248,13 @@ router.get('/', function(req, res, next) {
 // ENDPOINTS
 
 /* GET all details of all hostels */
-router.get('/hostels', function(req, res) { 
+router.get('/api/hostels', function(req, res) {
     hostels.length==0 ? res.status(404): res.status(200);
     res.send(hostels);
 })
   
 /* GET hostel by id */
-router.get('/hostels/:id', function(req, res) { 
+router.get('/api/hostels/:id', function(req, res) {
     var selectedhostels = hostels.filter(function(hostel) {
       return hostel.id == req.params["id"];
     });
@@ -263,7 +263,7 @@ router.get('/hostels/:id', function(req, res) {
 })
 
 /* GET books by search term in description or title (TBD) */
-router.get('/hostels/search/:term', function(req, res) { 
+router.get('/api/hostels/search/:term', function(req, res) {
   var selectedhostels = hostels.filter(function(hostel) {
     var result = (hostel.address.toLowerCase().search(req.params["term"].toLowerCase())>=0) || 
         (hostel.description.toLowerCase().search(req.params["term"].toLowerCase())>=0);
@@ -275,7 +275,7 @@ router.get('/hostels/search/:term', function(req, res) {
 
 
 /* GET add rating for hostel by id */
-router.get('/hostels/rate/:id/:rating', function(req, res) { 
+router.get('/api/hostels/rate/:id/:rating', function(req, res) {
   var id = req.params["id"];
   var rating = Number(req.params["rating"]);
   var hostel = hostels.find(x => x.id == id);
@@ -286,7 +286,7 @@ router.get('/hostels/rate/:id/:rating', function(req, res) {
 
 /* POST new review for hostel by id */
 /* body should be of the form {"reviewer":"anon", "review":"Great hostel"}  */
-router.post('/hostels/review/:id', function(req, res) { 
+router.post('/api/hostels/review/:id', function(req, res) {
   var id = req.params["id"];
   var hostel = hostels.find(x => x.id == id);
   var newreview = req.body;
@@ -296,13 +296,13 @@ router.post('/hostels/review/:id', function(req, res) {
 })
 
 /* GET all itineraries */
-router.get('/itineraries', function(req, res) { 
+router.get('/api/itineraries', function(req, res) {
     itineraries.length==0 ? res.status(404): res.status(200);
     res.send(itineraries);
   })
 
 /* GET itinerary for user */
-router.get('/itineraries/:user', function(req, res) { 
+router.get('/api/itineraries/:user', function(req, res) {
   var selecteditinerary = itineraries.filter(function(it) {
     return it.user == req.params["user"];
   });
@@ -311,7 +311,7 @@ router.get('/itineraries/:user', function(req, res) {
 })
 
 /* GET create new itinerary for user */
-router.get('/itineraries/new/:user', function(req, res) { 
+router.get('/api/itineraries/new/:user', function(req, res) {
     
     var user = req.params["user"]
     var startdate = new Date();
@@ -323,7 +323,7 @@ router.get('/itineraries/new/:user', function(req, res) {
 
 /* GET set start date */
 /* :date param should be of the form "2022-02-10T00:00:00.000Z" */
-router.get('/itineraries/startdate/:user/:date', function(req, res) {  
+router.get('/api/itineraries/startdate/:user/:date', function(req, res) {
     var user = req.params["user"];
     var startdate = new Date(req.params["date"]);
     var itinerary = itineraries.find(x => x.user == user);
@@ -338,7 +338,7 @@ router.get('/itineraries/startdate/:user/:date', function(req, res) {
 /* POST new itinerary stage */
 /* body should be of the form {"hostel":1, "nights":2} */
 /* doesn't check for valid hostel id */
-router.post('/itineraries/stages/new/:user', function(req, res) { 
+router.post('/api/itineraries/stages/new/:user', function(req, res) {
     var user = req.params["user"];
     var itinerary = itineraries.find(x => x.user == user);
     if(itinerary) {
@@ -354,7 +354,7 @@ router.post('/itineraries/stages/new/:user', function(req, res) {
 /* POST update itinerary stage */
 /* body should be of the form {"hostel":1, "nights":2} */
 /* doesn't check for valid hostel id */
-router.post('/itineraries/stages/update/:user/:stage', function(req, res) { 
+router.post('/api/itineraries/stages/update/:user/:stage', function(req, res) {
     stagenumber = req.params["stage"];
     var user = req.params["user"];
     var itinerary = itineraries.find(x => x.user == user);

@@ -28,6 +28,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "start": "concurrently \"cd backend && npm run start\" \"npm run clientStart\"",
     "dev": "concurrently \"cd backend && npm run start\" \"npm run clientStart\"",
     "devMac": "concurrently \"cd backend && npm run start\" \"npm run clientStartMac\"",
     "clientStart": "react-scripts start",
@@ -36,6 +37,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:3001",
   "eslintConfig": {
     "extends": [
       "react-app",
