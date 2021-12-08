@@ -30,7 +30,7 @@ export default function App()
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/hostels" element={<HostelsPage />} />
-                <Route path="/hostel" element={<HostelPage />} />
+                <Route path="/hostel/:id" element={<HostelPage />} />
                 <Route path="/test" element={<TestPage />} />
             </Routes>
             <LoadingSpinner></LoadingSpinner>
