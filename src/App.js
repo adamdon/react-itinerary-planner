@@ -17,6 +17,7 @@ import TestPage from "./components/pages/test/TestPage";
 import ToastBock from "./components/utilities/ToastBlock";
 import LoadingSpinner from "./components/utilities/LoadingSpinner";
 import HostelPage from "./components/pages/hostel/HostelPage";
+import ItinerariesPage from "./components/pages/itineraries/ItinerariesPage";
 
 
 
@@ -31,6 +32,7 @@ export default function App()
                 <Route path="/" element={<HomePage />} />
                 <Route path="/hostels" element={<HostelsPage />} />
                 <Route path="/hostel/:id" element={<HostelPage />} />
+                <Route path="/itineraries" element={<ItinerariesPage />} />
                 <Route path="/test" element={<TestPage />} />
             </Routes>
             <LoadingSpinner></LoadingSpinner>

@@ -27,6 +27,7 @@ export default function DataContextProvider({children})
                 baseUrl: "/api/",
             },
             photos: [],
+            itineraries: [],
             hostels: [],
             filteredHostels: [],
             filterText: "",

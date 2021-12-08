@@ -38,6 +38,9 @@ export default function NavTop()
                         <Link to="/hostels" className="dropdown-item text-center">Hostels</Link>
                     </li>
                     <li>
+                        <Link to="/itineraries" className="dropdown-item text-center">Itineraries</Link>
+                    </li>
+                    <li>
                         <Link to="/test" className="dropdown-item text-center">Test</Link>
                     </li>
                 </ul>
