@@ -26,10 +26,13 @@ export default function AddItinerary(props)
 
     async function submitButtonOnClick()
     {
-
         if(user === "")
         {
             setData({toastMessage: "Input 'user' before submitting"});
+        }
+        else if(!user.match(/^[0-9a-zA-Z\s]+$/))
+        {
+            setData({toastMessage: "'user' can only contain letters, numbers and spaces"});
         }
         else if(data.itineraries.length === 0)
         {

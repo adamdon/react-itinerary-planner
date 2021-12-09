@@ -79,31 +79,22 @@ body
 {
     flex-grow: 1;
     transition: all 350ms ease;
-
-    /*transition: all 1.5s linear;*/
-    /*-o-transition: all 1.5s linear;*/
-    /*-moz-transition: all 1.5s linear;*/
-    /*-webkit-transition: all 1.5s linear;*/
 }
 
 .col-xl-6
 {
     flex-shrink: 1;
     transition: all 350ms ease;
+}
 
-    /*transition: all 1.5s linear;*/
-    /*-o-transition: all 1.5s linear;*/
-    /*-moz-transition: all 1.5s linear;*/
-    /*-webkit-transition: all 1.5s linear;*/
+.col-xl-4
+{
+    flex-shrink: 1;
+    transition: all 350ms ease;
 }
 
 
-/*.col-md-6.col-sm-12 {*/
-/*    transition: all 1.5s linear;*/
-/*    -o-transition: all 1.5s linear;*/
-/*    -moz-transition: all 1.5s linear;*/
-/*    -webkit-transition: all 1.5s linear;*/
-/*}*/
+
 
 
 
