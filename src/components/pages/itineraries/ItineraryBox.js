@@ -3,6 +3,8 @@ import ContainerContent from "../../containers/ContainerContent";
 import CollapsedHostelBox from "../hostels/CollapsedHostelBox";
 import ExpandedHostelBox from "../hostels/ExpandedHostelBox";
 import {useData} from "../../data/DataContextProvider";
+import EditItinerary from "./EditItinerary";
+import PreviewItinerary from "./PreviewItinerary";
 
 
 
@@ -36,17 +38,27 @@ export default function ItineraryBox(props)
         <ContainerContent size={size} icon="hotel" title={props.itinerary.user}>
 
 
-            {JSON.stringify(props.itinerary)}
+            {/*{JSON.stringify(props.itinerary)}*/}
 
-            {/*always shown nav buttons*/}
+            <PreviewItinerary itinerary={props.itinerary}/>
+
+
+            <EditItinerary itinerary={props.itinerary}/>
+
+
+
             <div className="mt-2 text-center">
-                <div className="d-grid gap-2" role="group" aria-label="Basic mixed styles example">
+                <div className="btn-group" role="group" aria-label="Basic outlined example">
+                    <button type="button" className="btn btn-outline-light"><i className="fa fa-road"></i> View</button>
                     <a href={'http://localhost:3000/hostel/' + props.itinerary.user} className="btn btn-outline-light" target="_blank" rel="noopener noreferrer"><i className="fa fa-share-alt"></i> Share</a>
-                    <button onClick={moreOnClick} data-bs-toggle="collapse" data-bs-target={"#collapse" + props.itinerary.user} aria-expanded="false" type="button" className="btn btn-outline-light"><i className="fa fa-info-edit"></i>
+                    <button onClick={moreOnClick} data-bs-target={"#collapse-edit-" + props.itinerary.user} data-bs-toggle="collapse" aria-expanded="false" type="button" className="btn btn-outline-light"><i className="fa fa-edit"></i>
                         {size === 4 ? " Edit" : " Finish Edit"}
                     </button>
                 </div>
             </div>
+
+
+
 
         </ContainerContent>
     );
