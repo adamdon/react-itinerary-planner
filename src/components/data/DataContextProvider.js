@@ -28,6 +28,8 @@ export default function DataContextProvider({children})
             },
             photos: [],
             itineraries: [],
+            itinerariesFiltered: [],
+            itinerariesFilterText: "",
             hostels: [],
             filteredHostels: [],
             filterText: "",

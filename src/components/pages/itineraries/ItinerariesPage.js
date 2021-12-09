@@ -6,6 +6,7 @@ import {useData} from "../../data/DataContextProvider";
 import {createClient} from "pexels";
 import ItineraryBox from "./ItineraryBox";
 import AddItinerary from "./AddItinerary";
+import SearchItineraries from "./SearchItineraries";
 
 
 
@@ -45,7 +46,7 @@ export default function ItinerariesPage(props)
         if(Number(response.status.toString().substring(0, 1)) === 2)
         {
             const jsonData = await response.json();
-            setData({itineraries: jsonData});
+            setData({itineraries: jsonData, itinerariesFiltered: jsonData});
             console.log(jsonData);
         }
         else
@@ -81,12 +82,12 @@ export default function ItinerariesPage(props)
 
 
                 <ContainerContentRow>
-                    <HostelsSearch/>
+                    <SearchItineraries/>
                 </ContainerContentRow>
 
 
                 <ContainerContentRow>
-                    {data.itineraries.map((itinerary) => (
+                    {data.itinerariesFiltered.map((itinerary) => (
                         <ItineraryBox key={itinerary.user} itinerary={itinerary}/>
                     ))}
                 </ContainerContentRow>

@@ -74,6 +74,9 @@ export default function AddItinerary(props)
 
             setUser("");
             setData({toastSuccess: "Itinerary Added"});
+            setData({itinerariesFilterText: user});
+            setUser("");
+
         }
         else
         {
@@ -89,6 +92,12 @@ export default function AddItinerary(props)
 
     return (
         <ContainerContent size={12} icon="plus" title={'Add New Itinerary'}>
+
+            <h4>Start your journey here</h4>
+
+            <p className="mb-3">
+                Add a new Itinerary then edit bellow
+            </p>
 
             <div className="input-group">
                 <span className="input-group-text">Add</span>
