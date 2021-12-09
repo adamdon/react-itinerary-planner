@@ -12,6 +12,10 @@ import PreviewItinerary from "./PreviewItinerary";
 export default function ItineraryBox(props)
 {
     const [size, setSize] = useState(4);
+    // const [showPreview, setShowPreview] = useState(true);
+    // const [showView, setShowView] = useState(false);
+    // const [showEdit, setShowEdit] = useState(false);
+
     const [data, setData] = useData();
 
 
@@ -22,7 +26,7 @@ export default function ItineraryBox(props)
     }, []);
 
 
-    function moreOnClick()
+    function editOnClick()
     {
         if(size === 4)//expand to large
         {
@@ -51,7 +55,7 @@ export default function ItineraryBox(props)
                 <div className="btn-group" role="group" aria-label="Basic outlined example">
                     <button type="button" className="btn btn-outline-light"><i className="fa fa-road"></i> View</button>
                     <a href={'http://localhost:3000/hostel/' + props.itinerary.user} className="btn btn-outline-light" target="_blank" rel="noopener noreferrer"><i className="fa fa-share-alt"></i> Share</a>
-                    <button onClick={moreOnClick} data-bs-target={"#collapse-edit-" + props.itinerary.user} data-bs-toggle="collapse" aria-expanded="false" type="button" className="btn btn-outline-light"><i className="fa fa-edit"></i>
+                    <button onClick={editOnClick} data-bs-target={"#collapse-edit-" + props.itinerary.user} data-bs-toggle="collapse" aria-expanded="false" type="button" className="btn btn-outline-light"><i className="fa fa-edit"></i>
                         {size === 4 ? " Edit" : " Finish Edit"}
                     </button>
                 </div>
