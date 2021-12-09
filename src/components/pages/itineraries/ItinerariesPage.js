@@ -55,6 +55,7 @@ export default function ItinerariesPage(props)
         }
 
         await fetchImageData();
+        await fetchHostelData();
         setData({showSpinner: false});
     }
 
@@ -69,6 +70,35 @@ export default function ItinerariesPage(props)
         let photosJson = pexelsData.photos;
         // console.log(photosJson);
         setData({photos: photosJson})
+    }
+
+
+    async function fetchHostelData()
+    {
+        setData({showSpinner: true});
+
+
+        // let requestBody = {};
+        let methodType = "GET"
+        let requestUrl = (data.config.baseUrl + "/hostels");
+        let requestHeaders = {"Content-Type": "application/json"};
+
+        const response = await fetch(requestUrl, {method: methodType, headers: requestHeaders});
+        // const response = await fetch(requestUrl, {method: methodType, headers: requestHeaders, body: JSON.stringify(requestBody)});
+
+        if(Number(response.status.toString().substring(0, 1)) === 2)
+        {
+            const jsonData = await response.json();
+            setData({hostels: jsonData, filteredHostels: jsonData});
+            console.log(jsonData);
+        }
+        else
+        {
+            setData({toastError: "Error: " + response.status + " - Could not load"});
+        }
+
+        await fetchImageData();
+        setData({showSpinner: false});
     }
 
     return (
