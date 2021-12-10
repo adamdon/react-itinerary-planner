@@ -1,175 +1,135 @@
 import React, {useState, useEffect} from "react";
-import ReactDOM from 'react-dom';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-
-import Info from "../hostels/Info";
-import AddReview from "../hostels/AddReview";
-import ViewReviews from "../hostels/ViewReviews";
-import ViewRatings from "../hostels/ViewRatings";
-
-
-// fake data generator
-const getItems = (count, offset = 0) =>
-    Array.from({ length: count }, (v, k) => k).map(k => ({
-        id: `item-${k + offset}`,
-        content: `item ${k + offset}`
-    }));
-
-// a little function to help us with reordering the result
-const reorder = (list, startIndex, endIndex) => {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-
-    return result;
-};
+import DraggableHostel from "./DraggableHostel";
+import {divIcon} from "leaflet/dist/leaflet-src.esm";
+import DroppableHostels from "./DroppableHostels";
+import {useData} from "../../data/DataContextProvider";
 
 
-/**
- * Moves an item from one list to another list.
- */
-const move = (source, destination, droppableSource, droppableDestination) => {
-    const sourceClone = Array.from(source);
-    const destClone = Array.from(destination);
-    const [removed] = sourceClone.splice(droppableSource.index, 1);
 
-    destClone.splice(droppableDestination.index, 0, removed);
-
-    const result = {};
-    result[droppableSource.droppableId] = sourceClone;
-    result[droppableDestination.droppableId] = destClone;
-
-    return result;
-};
-
-const grid = 8;
-
-const getItemStyle = (isDragging, draggableStyle) => ({
-    // some basic styles to make the items look a bit nicer
-    userSelect: 'none',
-    padding: grid * 2,
-    margin: `0 0 ${grid}px 0`,
-
-    // change background colour if dragging
-    background: isDragging ? 'lightgreen' : 'grey',
-
-    // styles we need to apply on draggables
-    ...draggableStyle
-});
-
-const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? 'lightblue' : 'lightgrey',
-    padding: grid,
-    width: "100%"
-});
 
 export default function EditItinerary(props)
 {
-    const [items, setItems] = useState(getItems(10));
-    const [selected, setSelected] = useState(getItems(5, 10));
+    const [data, setData] = useData();
+
+    const [items, setItems] = useState([]);
+    const [selected, setSelected] = useState([]);
 
     useEffect(() =>
     {
-        console.log("useEffect start");
-        console.log(getList(2));
-        console.log(getList("droppable"));
-        console.log(getList("droppable2"));
-        console.log(getItems(2, 2));
-        console.log(items);
-        console.log(selected);
-        console.log(getItems(2, 2));
         console.log("useEffect start");
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 
-
-    /**
-     * A semi-generic way to handle multiple lists. Matches
-     * the IDs of the droppable container to the names of the
-     * source arrays stored in the state.
-     */
-    let id2List = {
-        droppable: 'items',
-        droppable2: 'selected'
-    };
-
-    let getList = id =>
+    useEffect(() =>
     {
-        if(id2List[id] === "items")
+        if(data.hostels.length > 0)
+        {
+            setItems(Array.from(data.hostels));
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data.hostels]);
+
+
+
+
+    function onDragEndSave(result)
+    {
+        const source = result.source;
+        const destination = result.destination;
+
+        if(!destination) //if dropped outside the list
+        {
+            return;
+        }
+        else if(source.droppableId === destination.droppableId) //if they are in the same list
+        {
+            const sourceList = getListFromId(source.droppableId);
+            const reorderedList = reorderList(sourceList, source.index, destination.index);
+
+            if (source.droppableId === "droppable")
+            {
+                setItems(reorderedList);
+            }
+            else if(source.droppableId === "droppable2")
+            {
+                setSelected(reorderedList);
+            }
+            else
+            {
+                console.error('Unknown list Id of ' + source.droppableId)
+            }
+
+        }
+        else //if they are in different lists
+        {
+            const sourceList = getListFromId(source.droppableId);
+            const destinationList = getListFromId(destination.droppableId);
+            const result = moveBetweenLists(sourceList, destinationList, source, destination);
+
+            setItems(result.droppable);
+            setSelected(result.droppable2);
+        }
+    }
+
+
+
+
+    function getListFromId(id)
+    {
+        let listIdPairings = {
+            droppable: 'items',
+            droppable2: 'selected'
+        };
+
+        if (listIdPairings[id] === "items")
         {
             return items;
         }
-        else if(id2List[id] === "selected")
+        else if (listIdPairings[id] === "selected")
         {
             return selected;
         }
     }
 
-    let onDragEnd = result =>
+
+
+
+
+    function reorderList(list, startIndex, endIndex)
     {
-        const { source, destination } = result;
+        const listCopy = Array.from(list);
+        const [removedItem] = listCopy.splice(startIndex, 1);
+        listCopy.splice(endIndex, 0, removedItem);
 
-        // dropped outside the list
-        if (!destination)
-        {
-            return;
-        }
-
-        if (source.droppableId === destination.droppableId) //if they are in the same list
-        {
-            console.log("1!11111!!!!!!!!  SAME LIST")
-
-            const reorder1 = reorder(
-                getList(source.droppableId),
-                source.index,
-                destination.index
-            );
-
-            // setItems(reorder1);
-
-            // let state = { reorder1 };
-
-            if (source.droppableId === 'droppable2')
-            {
-                console.log("1!11111!!!!!!!! droppable2")
-                // state = { selected: reorder1 };
-                // setItems(reorder1);
-                setSelected(reorder1)
-
-            }
-            else
-            {
-                console.log("1!11111!!!!!!!! droppable1");
-                console.log(reorder1);
-                console.log(items);
-                setItems(reorder1);
-            }
+        return listCopy;
+    }
 
 
-        }
-        else
-        {
-            const result = move(
-                getList(source.droppableId),
-                getList(destination.droppableId),
-                source,
-                destination
-            );
+
+    function moveBetweenLists(source, destination, droppableSource, droppableDestination)
+    {
+        const sourceListCopy = Array.from(source);
+        const destinationListCopy = Array.from(destination);
+        const [removedItem] = sourceListCopy.splice(droppableSource.index, 1);
+
+        destinationListCopy.splice(droppableDestination.index, 0, removedItem);
+
+        const result = {};
+        result[droppableSource.droppableId] = sourceListCopy;
+        result[droppableDestination.droppableId] = destinationListCopy;
+
+        return result;
+    }
 
 
-            // this.setState({
-            //     items: result.droppable,
-            //     selected: result.droppable2
-            // });
-
-            setItems(result.droppable);
-            setSelected(result.droppable2);
 
 
-        }
-    };
+
+
+
 
 
 
@@ -184,7 +144,7 @@ export default function EditItinerary(props)
 
                 {"Edit stuff here for " +  props.itinerary.user}
 
-                <DragDropContext onDragEnd={onDragEnd}>
+                <DragDropContext onDragEnd={onDragEndSave}>
 
                     <div className={'container'}>
                         <div className="row">
@@ -195,34 +155,32 @@ export default function EditItinerary(props)
                                 </div>
                                 <Droppable droppableId="droppable">
                                     {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            style={getListStyle(snapshot.isDraggingOver)}>
-                                            {items.map((item, index) => (
-                                                <Draggable
-                                                    key={item.id}
-                                                    draggableId={item.id}
-                                                    index={index}>
-                                                    {(provided, snapshot) => (
-                                                        <div
-                                                            ref={provided.innerRef}
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
-                                                            style={getItemStyle(
-                                                                snapshot.isDragging,
-                                                                provided.draggableProps.style
-                                                            )}>
-                                                            {item.content}
-                                                        </div>
-                                                    )}
-                                                </Draggable>
-                                            ))}
-                                            {provided.placeholder}
+                                        <div ref={provided.innerRef}>
+                                            <DroppableHostels isDraggingOver={snapshot.isDraggingOver}>
+
+                                                {items.map((item, index) => (
+                                                    <Draggable key={item.id} draggableId={item.id} index={index}>
+                                                        {(provided, snapshot) => (
+                                                            <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={{margin: `0 0 16px 0`, ...provided.draggableProps.style}}>
+
+                                                                <DraggableHostel hostel={item} isDragging={snapshot.isDragging}/>
+
+                                                            </div>
+                                                        )}
+                                                    </Draggable>
+                                                ))}
+
+                                                {provided.placeholder}
+                                            </DroppableHostels>
+
+
                                         </div>
                                     )}
                                 </Droppable>
 
                             </div>
+
+
 
 
 
@@ -235,29 +193,26 @@ export default function EditItinerary(props)
 
                                 <Droppable droppableId="droppable2">
                                     {(provided, snapshot) => (
-                                        <div
-                                            ref={provided.innerRef}
-                                            style={getListStyle(snapshot.isDraggingOver)}>
-                                            {selected.map((item, index) => (
-                                                <Draggable
-                                                    key={item.id}
-                                                    draggableId={item.id}
-                                                    index={index}>
-                                                    {(provided, snapshot) => (
-                                                        <div
-                                                            ref={provided.innerRef}
-                                                            {...provided.draggableProps}
-                                                            {...provided.dragHandleProps}
-                                                            style={getItemStyle(
-                                                                snapshot.isDragging,
-                                                                provided.draggableProps.style
-                                                            )}>
-                                                            {item.content}
-                                                        </div>
-                                                    )}
-                                                </Draggable>
-                                            ))}
-                                            {provided.placeholder}
+                                        <div ref={provided.innerRef}>
+
+                                            <DroppableHostels isDraggingOver={snapshot.isDraggingOver}>
+
+                                                {selected.map((item, index) => (
+                                                    <Draggable key={item.id} draggableId={item.id} index={index}>
+                                                        {(provided, snapshot) => (
+                                                            <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={{margin: `0 0 16px 0`, ...provided.draggableProps.style}}>
+
+                                                                <DraggableHostel hostel={item} isDragging={snapshot.isDragging}/>
+
+                                                            </div>
+                                                        )}
+                                                    </Draggable>
+                                                ))}
+
+                                                {provided.placeholder}
+                                            </DroppableHostels>
+
+
                                         </div>
                                     )}
                                 </Droppable>
@@ -268,65 +223,8 @@ export default function EditItinerary(props)
                         </div>
                     </div>
 
-                    {/*<Droppable droppableId="droppable">*/}
-                    {/*    {(provided, snapshot) => (*/}
-                    {/*        <div*/}
-                    {/*            ref={provided.innerRef}*/}
-                    {/*            style={getListStyle(snapshot.isDraggingOver)}>*/}
-                    {/*            {items.map((item, index) => (*/}
-                    {/*                <Draggable*/}
-                    {/*                    key={item.id}*/}
-                    {/*                    draggableId={item.id}*/}
-                    {/*                    index={index}>*/}
-                    {/*                    {(provided, snapshot) => (*/}
-                    {/*                        <div*/}
-                    {/*                            ref={provided.innerRef}*/}
-                    {/*                            {...provided.draggableProps}*/}
-                    {/*                            {...provided.dragHandleProps}*/}
-                    {/*                            style={getItemStyle(*/}
-                    {/*                                snapshot.isDragging,*/}
-                    {/*                                provided.draggableProps.style*/}
-                    {/*                            )}>*/}
-                    {/*                            {item.content}*/}
-                    {/*                        </div>*/}
-                    {/*                    )}*/}
-                    {/*                </Draggable>*/}
-                    {/*            ))}*/}
-                    {/*            {provided.placeholder}*/}
-                    {/*        </div>*/}
-                    {/*    )}*/}
-                    {/*</Droppable>*/}
 
-                    {/*<div>{'text'}</div>*/}
 
-                    {/*<Droppable droppableId="droppable2">*/}
-                    {/*    {(provided, snapshot) => (*/}
-                    {/*        <div*/}
-                    {/*            ref={provided.innerRef}*/}
-                    {/*            style={getListStyle(snapshot.isDraggingOver)}>*/}
-                    {/*            {selected.map((item, index) => (*/}
-                    {/*                <Draggable*/}
-                    {/*                    key={item.id}*/}
-                    {/*                    draggableId={item.id}*/}
-                    {/*                    index={index}>*/}
-                    {/*                    {(provided, snapshot) => (*/}
-                    {/*                        <div*/}
-                    {/*                            ref={provided.innerRef}*/}
-                    {/*                            {...provided.draggableProps}*/}
-                    {/*                            {...provided.dragHandleProps}*/}
-                    {/*                            style={getItemStyle(*/}
-                    {/*                                snapshot.isDragging,*/}
-                    {/*                                provided.draggableProps.style*/}
-                    {/*                            )}>*/}
-                    {/*                            {item.content}*/}
-                    {/*                        </div>*/}
-                    {/*                    )}*/}
-                    {/*                </Draggable>*/}
-                    {/*            ))}*/}
-                    {/*            {provided.placeholder}*/}
-                    {/*        </div>*/}
-                    {/*    )}*/}
-                    {/*</Droppable>*/}
 
 
 
