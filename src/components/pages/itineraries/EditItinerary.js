@@ -134,7 +134,7 @@ export default function EditItinerary(props)
 
 
     return (
-        <div className="collapse container" id={"collapse-edit-" + props.itinerary.user}>
+        <div className="collapse container mb-3" id={"collapse-edit-" + props.itinerary.user}>
 
             <div className="" style={{minHeight: 300}}>
 
@@ -148,14 +148,17 @@ export default function EditItinerary(props)
 
                     <div className={'container'}>
                         <div className="row">
-                            <div className="col-6 text-center">
+
+
+
+                            <div className="col-6 text-center " >
 
                                 <div>
                                     div 1
                                 </div>
-                                <Droppable droppableId="droppable">
+                                <Droppable droppableId="droppable" >
                                     {(provided, snapshot) => (
-                                        <div ref={provided.innerRef}>
+                                        <div ref={provided.innerRef} style={{height: '100%'}}>
                                             <DroppableHostels isDraggingOver={snapshot.isDraggingOver}>
 
                                                 {items.map((item, index) => (
@@ -184,7 +187,7 @@ export default function EditItinerary(props)
 
 
 
-                            <div className="col-6 text-center">
+                            <div className="col-6 text-center" >
 
 
                                 <div>
@@ -193,9 +196,10 @@ export default function EditItinerary(props)
 
                                 <Droppable droppableId="droppable2">
                                     {(provided, snapshot) => (
-                                        <div ref={provided.innerRef}>
+                                        <div ref={provided.innerRef} style={{height: '100%'}} >
+                                            <DroppableHostels isDraggingOver={snapshot.isDraggingOver} >
+                                                {/*{provided.placeholder}*/}
 
-                                            <DroppableHostels isDraggingOver={snapshot.isDraggingOver}>
 
                                                 {selected.map((item, index) => (
                                                     <Draggable key={item.id} draggableId={item.id} index={index}>
