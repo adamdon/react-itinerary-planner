@@ -73,13 +73,14 @@ export default function AddItinerary(props)
         if(Number(response.status.toString().substring(0, 1)) === 2) //check that response code starts with 2
         {
             const jsonData = await response.json();
+            await fetchPopulateStages();
             await props.fetchItinerariesData();
+
 
             setUser("");
             setData({toastSuccess: "Itinerary Added"});
             setData({itinerariesFilterText: user});
             setUser("");
-
         }
         else
         {
@@ -89,6 +90,29 @@ export default function AddItinerary(props)
 
         setData({showSpinner: false});
         setDisabled(false);
+    }
+
+    async function fetchPopulateStages()
+    {
+        for(let index = 0; index < 20; index++)
+        {
+            let requestBody = {hostel: 999, nights: 999};
+            let methodType = "POST"
+            let requestUrl = (data.config.baseUrl + "/itineraries/stages/new/" + user);
+            let requestHeaders = {"Content-Type": "application/json"};
+
+            const response = await fetch(requestUrl, {method: methodType, headers: requestHeaders, body: JSON.stringify(requestBody)});
+
+            if(Number(response.status.toString().substring(0, 1)) === 2) //check that response code starts with 2
+            {
+                const jsonData = await response.json();
+                console.log(jsonData);
+            }
+            else
+            {
+                setData({toastError: "Error: " + response.status + " - Could not action"});
+            }
+        }
     }
 
 

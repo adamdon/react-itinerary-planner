@@ -1,4 +1,5 @@
 import React, {useEffect} from "react";
+import { v4 as uuid } from 'uuid';
 import ContainerLayout from "../../containers/ContainerLayout";
 import ContainerContentRow from "../../containers/ContainerContentRow";
 import HostelsSearch from "../hostels/HostelsSearch";
@@ -46,6 +47,15 @@ export default function ItinerariesPage(props)
         if(Number(response.status.toString().substring(0, 1)) === 2)
         {
             const jsonData = await response.json();
+
+            for(let itinerary of jsonData) // add a unique id to every stage for keys
+            {
+                for(let stage of itinerary.stages)
+                {
+                    stage.uuid = uuid();
+                }
+            }
+
             setData({itineraries: jsonData, itinerariesFiltered: jsonData});
             console.log(jsonData);
         }

@@ -15,6 +15,12 @@ export default function StageInfo(props)
     }
 
 
+    if((props.stage.hostel) === 999 && (props.stage.nights === 999))
+    {
+        return (<div>No Show, {props.stage.hostel} , {props.stage.nights}, {props.stage.stage}, {props.index} </div>);
+    }
+
+
 
     return (
         // <div className="text-center rounded-3 py-3" style={{backgroundImage: `url('https://random.dog/428711bd-7381-4998-a4b5-47b682c95b1b.jpg')`}}>
@@ -23,7 +29,7 @@ export default function StageInfo(props)
             <table className="table table-sm table-hover bg-primary table-borderless table-fit d-inline-block m-0 pb-1 rounded-3">
                 <thead>
                     <tr className="table-active">
-                        <th className="text-center text-light" colSpan={2}>Stage Info</th>
+                        <th className="text-center text-light" colSpan={2}>Stage {props.index}</th>
                     </tr>
                 </thead>
                 <tbody className="">

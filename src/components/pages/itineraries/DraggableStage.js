@@ -29,12 +29,12 @@ export default function DraggableStage(props)
     return (
         <div className={props.isDragging ? "bg-secondary card text-white" : "bg-primary card text-white"}>
 
-            <div className="card-header text-start"><i className={`fa fa-road`}></i> Stage: {props.stage.stage}</div>
+            <div className="card-header text-start"><i className={`fa fa-road`}></i> {data.hostels.find((hostel) => Number(hostel.id) === props.stage.hostel).name} - Stage: {props.index + 1}</div>
 
             <div className="card-body">
 
                 {/*<Info hostel={props.hostel}/>*/}
-                <StageInfo stage={props.stage} itinerary={props.itinerary} hostel={data.hostels.find((hostel) => Number(hostel.id) === props.stage.hostel)}/>
+                <StageInfo stage={props.stage} itinerary={props.itinerary} index={props.index} hostel={data.hostels.find((hostel) => Number(hostel.id) === props.stage.hostel)}/>
 
             </div>
 

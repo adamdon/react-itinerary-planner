@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import { v4 as uuid } from 'uuid';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import DraggableHostel from "./DraggableHostel";
 import {divIcon} from "leaflet/dist/leaflet-src.esm";
@@ -18,10 +19,32 @@ export default function EditItinerary(props)
 
     useEffect(() =>
     {
-        console.log("useEffect start");
+        // console.log("useEffect start");
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() =>
+    {
+        // console.log(">>>>items update");
+        // console.log(items)
+        // console.log("<<<items update");
+
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [items]);
+
+
+    useEffect(() =>
+    {
+        // console.log(">>>>selected update");
+        // console.log(selected)
+        // console.log("<<<selected update");
+
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selected]);
+
 
 
     useEffect(() =>
@@ -29,7 +52,7 @@ export default function EditItinerary(props)
         if(data.hostels.length > 0)
         {
             setItems(Array.from(data.hostels));
-            setSelected(Array.from(props.itinerary.stages));
+            setSelected(Array.from(props.itinerary.stages.filter((stage) => stage.hostel !== 999)));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data.hostels]);
@@ -69,7 +92,8 @@ export default function EditItinerary(props)
         {
             const sourceList = getListFromId(source.droppableId);
             const destinationList = getListFromId(destination.droppableId);
-            const result = moveBetweenLists(sourceList, destinationList, source, destination);
+            // const result = moveBetweenLists(sourceList, destinationList, source, destination);
+            const result = moveNewBetweenLists(sourceList, destinationList, source, destination);
 
             setItems(result.droppable);
             setSelected(result.droppable2);
@@ -124,6 +148,45 @@ export default function EditItinerary(props)
         result[droppableDestination.droppableId] = destinationListCopy;
 
         return result;
+    }
+
+
+    function moveNewBetweenLists(source, destination, droppableSource, droppableDestination)
+    {
+        if(droppableDestination.droppableId === "droppable2")//Moving from hostels to stages
+        {
+            const sourceListCopy = Array.from(source);
+            const destinationListCopy = Array.from(destination);
+            const [removedItem] = sourceListCopy.splice(droppableSource.index, 1);
+
+            let newStage = {hostel: Number(removedItem.id), nights: 1, stage: droppableDestination.index, uuid: uuid()};
+
+            destinationListCopy.splice(droppableDestination.index, 0, newStage);
+
+
+            const result = {};
+            result[droppableSource.droppableId] = sourceListCopy;
+            result[droppableDestination.droppableId] = destinationListCopy;
+            return result;
+
+        }
+        else //Moving from stages to hostels
+        {
+            const sourceListCopy = Array.from(source);
+            const destinationListCopy = Array.from(destination);
+            const [removedItem] = sourceListCopy.splice(droppableSource.index, 1);
+
+            let hostelToAddBack = data.hostels.find((hostel) => Number(hostel.id) === removedItem.hostel)
+
+            destinationListCopy.splice(droppableDestination.index, 0, hostelToAddBack);
+
+
+            const result = {};
+            result[droppableSource.droppableId] = sourceListCopy;
+            result[droppableDestination.droppableId] = destinationListCopy;
+            return result;
+        }
+
     }
 
 
@@ -202,7 +265,7 @@ export default function EditItinerary(props)
 
 
                                                 {selected.map((item, index) => (
-                                                    <Draggable key={item.stage} draggableId={"stage_" +item.stage.toString()} index={index}>
+                                                    <Draggable key={item.uuid} draggableId={item.uuid} index={index}>
                                                         {(provided, snapshot) => (
                                                             <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={{margin: `0 0 16px 0`, ...provided.draggableProps.style}}>
 
