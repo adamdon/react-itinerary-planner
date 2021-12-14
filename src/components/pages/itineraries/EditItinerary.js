@@ -14,6 +14,8 @@ export default function EditItinerary(props)
 {
     const [data, setData] = useData();
 
+    const [disabled, setDisabled] = useState(false);
+
     const [items, setItems] = useState([]);
     const [selected, setSelected] = useState([]);
 
@@ -37,13 +39,20 @@ export default function EditItinerary(props)
 
     useEffect(() =>
     {
-        // console.log(">>>>selected update");
-        // console.log(selected)
-        // console.log("<<<selected update");
+        async function selectedUseEffect()
+        {
+            await updateStages();
+        }
 
+        if(selected.length > 0)
+        {
+            selectedUseEffect().then();
+        }
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [selected]);
+
+
 
 
 
@@ -135,20 +144,20 @@ export default function EditItinerary(props)
 
 
 
-    function moveBetweenLists(source, destination, droppableSource, droppableDestination)
-    {
-        const sourceListCopy = Array.from(source);
-        const destinationListCopy = Array.from(destination);
-        const [removedItem] = sourceListCopy.splice(droppableSource.index, 1);
-
-        destinationListCopy.splice(droppableDestination.index, 0, removedItem);
-
-        const result = {};
-        result[droppableSource.droppableId] = sourceListCopy;
-        result[droppableDestination.droppableId] = destinationListCopy;
-
-        return result;
-    }
+    // function moveBetweenLists(source, destination, droppableSource, droppableDestination)
+    // {
+    //     const sourceListCopy = Array.from(source);
+    //     const destinationListCopy = Array.from(destination);
+    //     const [removedItem] = sourceListCopy.splice(droppableSource.index, 1);
+    //
+    //     destinationListCopy.splice(droppableDestination.index, 0, removedItem);
+    //
+    //     const result = {};
+    //     result[droppableSource.droppableId] = sourceListCopy;
+    //     result[droppableDestination.droppableId] = destinationListCopy;
+    //
+    //     return result;
+    // }
 
 
     function moveNewBetweenLists(source, destination, droppableSource, droppableDestination)
@@ -187,6 +196,48 @@ export default function EditItinerary(props)
             return result;
         }
 
+    }
+
+    async function updateStages()
+    {
+        console.log(">>>>selected updateStages " + props.itinerary.user);
+        console.log(selected)
+
+        setDisabled(true);
+        setData({showSpinner: true});
+
+        for(let currentStage of selected)
+        {
+            await fetchUpdateStage(currentStage.hostel, currentStage.nights, selected.indexOf(currentStage));
+        }
+
+
+        setDisabled(false);
+        setData({showSpinner: false});
+        console.log("<<<selected updateStages" + props.itinerary.user);
+    }
+
+
+
+    async function fetchUpdateStage(hostelId, nightsNumber, stageNumber)
+    {
+        let requestBody = {hostel: hostelId, nights: nightsNumber};
+        let methodType = "POST"
+        let requestUrl = (data.config.baseUrl + "/itineraries/stages/update/" + props.itinerary.user + "/" + stageNumber);
+        let requestHeaders = {"Content-Type": "application/json"};
+
+        const response = await fetch(requestUrl, {method: methodType, headers: requestHeaders, body: JSON.stringify(requestBody)});
+
+        if(Number(response.status.toString().substring(0, 1)) === 2) //check that response code starts with 2
+        {
+            const jsonData = await response.json();
+            // console.log(jsonData);
+            console.log(jsonData);
+        }
+        else
+        {
+            setData({toastError: "Error: " + response.status + " - Could not action"});
+        }
     }
 
 
