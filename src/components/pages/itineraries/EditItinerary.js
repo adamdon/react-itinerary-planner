@@ -4,6 +4,7 @@ import DraggableHostel from "./DraggableHostel";
 import {divIcon} from "leaflet/dist/leaflet-src.esm";
 import DroppableHostels from "./DroppableHostels";
 import {useData} from "../../data/DataContextProvider";
+import DraggableStage from "./DraggableStage";
 
 
 
@@ -28,6 +29,7 @@ export default function EditItinerary(props)
         if(data.hostels.length > 0)
         {
             setItems(Array.from(data.hostels));
+            setSelected(Array.from(props.itinerary.stages));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data.hostels]);
@@ -154,7 +156,7 @@ export default function EditItinerary(props)
                             <div className="col-6 text-center " >
 
                                 <div>
-                                    div 1
+                                    Hostel Options
                                 </div>
                                 <Droppable droppableId="droppable" >
                                     {(provided, snapshot) => (
@@ -189,7 +191,7 @@ export default function EditItinerary(props)
 
 
                                 <div>
-                                    div 2
+                                    Your Itinerary
                                 </div>
 
                                 <Droppable droppableId="droppable2">
@@ -200,11 +202,11 @@ export default function EditItinerary(props)
 
 
                                                 {selected.map((item, index) => (
-                                                    <Draggable key={item.id} draggableId={item.id} index={index}>
+                                                    <Draggable key={item.stage} draggableId={"stage_" +item.stage.toString()} index={index}>
                                                         {(provided, snapshot) => (
                                                             <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={{margin: `0 0 16px 0`, ...provided.draggableProps.style}}>
 
-                                                                <DraggableHostel hostel={item} isDragging={snapshot.isDragging}/>
+                                                                <DraggableStage index={index} stage={item} itinerary={props.itinerary}  isDragging={snapshot.isDragging}/>
 
                                                             </div>
                                                         )}
