@@ -134,7 +134,7 @@ export default function EditItinerary(props)
 
 
     return (
-        <div className="collapse container mb-3" id={"collapse-edit-" + props.itinerary.user}>
+        <div className="collapse container" id={"collapse-edit-" + props.itinerary.user}>
 
             <div className="" style={{minHeight: 300}}>
 
@@ -165,9 +165,7 @@ export default function EditItinerary(props)
                                                     <Draggable key={item.id} draggableId={item.id} index={index}>
                                                         {(provided, snapshot) => (
                                                             <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={{margin: `0 0 16px 0`, ...provided.draggableProps.style}}>
-
                                                                 <DraggableHostel hostel={item} isDragging={snapshot.isDragging}/>
-
                                                             </div>
                                                         )}
                                                     </Draggable>
