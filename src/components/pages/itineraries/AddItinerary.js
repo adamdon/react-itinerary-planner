@@ -34,9 +34,9 @@ export default function AddItinerary(props)
         {
             setData({toastMessage: "'user' can only contain letters, numbers and spaces"});
         }
-        else if(data.itineraries.length === 0)
+        else if(data.hostels.length === 0)
         {
-            setData({toastMessage: "Still loading itineraries"});
+            setData({toastMessage: "Still loading hostels"});
         }
         else if(data.itineraries.some(itinerary => itinerary.user.toLowerCase().trim() === user.toLowerCase().trim()))
         {
@@ -106,7 +106,7 @@ export default function AddItinerary(props)
             if(Number(response.status.toString().substring(0, 1)) === 2) //check that response code starts with 2
             {
                 const jsonData = await response.json();
-                console.log(jsonData);
+                // console.log(jsonData);
             }
             else
             {

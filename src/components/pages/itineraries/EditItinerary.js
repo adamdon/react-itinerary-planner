@@ -58,9 +58,12 @@ export default function EditItinerary(props)
 
     useEffect(() =>
     {
-        if(data.hostels.length > 0)
+        if(data.hostels.length > 0)//waits for everything to stop loading
         {
-            setItems(Array.from(data.hostels));
+            //below removes already used hostels from loaded list so only hostels that aren't part of the itinerary show
+            setItems(Array.from(data.hostels.filter((hostel) => !props.itinerary.stages.some((stage => Number(stage.hostel) === Number(hostel.id))))));
+
+            //below removes masked out itineraries that have been deleted
             setSelected(Array.from(props.itinerary.stages.filter((stage) => stage.hostel !== 999)));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -206,9 +209,23 @@ export default function EditItinerary(props)
         setDisabled(true);
         setData({showSpinner: true});
 
+        // for(let index = 0; index < 20; index++)
+        // {
+        //     let currentStage = selected.indexOf(index);
+        //
+        //     if(currentStage)
+        //     {
+        //         // await fetchUpdateStage(currentStage.hostel, currentStage.nights, selected.indexOf(currentStage));
+        //         await fetchUpdateStage(currentStage.hostel, currentStage.nights, (index + 1));
+        //
+        //     }
+        //
+        //
+        // }
+
         for(let currentStage of selected)
         {
-            await fetchUpdateStage(currentStage.hostel, currentStage.nights, selected.indexOf(currentStage));
+            await fetchUpdateStage(currentStage.hostel, currentStage.nights, selected.indexOf(currentStage) + 1);
         }
 
 
@@ -232,7 +249,7 @@ export default function EditItinerary(props)
         {
             const jsonData = await response.json();
             // console.log(jsonData);
-            console.log(jsonData);
+            // console.log(jsonData);
         }
         else
         {

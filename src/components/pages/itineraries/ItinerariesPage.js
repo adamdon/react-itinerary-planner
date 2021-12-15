@@ -48,7 +48,9 @@ export default function ItinerariesPage(props)
         {
             const jsonData = await response.json();
 
-            for(let itinerary of jsonData) // add a unique id to every stage for keys
+            let itineraries = jsonData.filter(itinerary => itinerary.user !== "Alice"); //itineraries start blank on first run
+
+            for(let itinerary of itineraries) // add a unique id to every stage for keys
             {
                 for(let stage of itinerary.stages)
                 {
@@ -56,8 +58,8 @@ export default function ItinerariesPage(props)
                 }
             }
 
-            setData({itineraries: jsonData, itinerariesFiltered: jsonData});
-            console.log(jsonData);
+            setData({itineraries: itineraries, itinerariesFiltered: itineraries});
+            console.log(itineraries);
         }
         else
         {
