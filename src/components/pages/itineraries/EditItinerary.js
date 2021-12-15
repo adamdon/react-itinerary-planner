@@ -44,7 +44,7 @@ export default function EditItinerary(props)
             await updateStages();
         }
 
-        if(selected.length > 0)
+        if(data.hostels.length > 0)
         {
             selectedUseEffect().then();
         }
@@ -201,38 +201,109 @@ export default function EditItinerary(props)
 
     }
 
+
+
     async function updateStages()
     {
-        console.log(">>>>selected updateStages " + props.itinerary.user);
-        console.log(selected)
-
+        // console.log(">>>>selected updateStages " + props.itinerary.user);
         setDisabled(true);
         setData({showSpinner: true});
 
-        // for(let index = 0; index < 20; index++)
-        // {
-        //     let currentStage = selected.indexOf(index);
-        //
-        //     if(currentStage)
-        //     {
-        //         // await fetchUpdateStage(currentStage.hostel, currentStage.nights, selected.indexOf(currentStage));
-        //         await fetchUpdateStage(currentStage.hostel, currentStage.nights, (index + 1));
-        //
-        //     }
-        //
-        //
-        // }
+        // console.log(selected)
 
-        for(let currentStage of selected)
+        let remoteStages = Array.from(props.itinerary.stages.filter((stage) => stage.hostel !== 999));
+
+
+        // console.log(remoteStages);
+        // console.log(selected);
+
+        if(selected.length > remoteStages.length) //stage has been added
         {
-            await fetchUpdateStage(currentStage.hostel, currentStage.nights, selected.indexOf(currentStage) + 1);
+            // console.log(">>>>>>>>>>> stage ADDED");
+            for(let currentStage of selected)
+            {
+                await fetchUpdateStage(currentStage.hostel, currentStage.nights, selected.indexOf(currentStage) + 1);
+            }
+            props.itinerary.stages = selected;
+        }
+        else if(selected.length < remoteStages.length) //stage has been removed
+        {
+            // console.log(">>>>>>>>>>> stage REMOVED");
+
+            for(let currentStage of selected)
+            {
+                await fetchUpdateStage(currentStage.hostel, currentStage.nights, selected.indexOf(currentStage) + 1);
+            }
+            await fetchUpdateStage(999, 999, (selected.length + 1)); //masks out the last element on remote
+            props.itinerary.stages = selected;
+        }
+        else if(selected.length === remoteStages.length) // no change
+        {
+            // console.log(">>>>>>>>>>> stage SAME");
+
+            for(let currentStage of selected)
+            {
+                await fetchUpdateStage(currentStage.hostel, currentStage.nights, selected.indexOf(currentStage) + 1);
+            }
+            props.itinerary.stages = selected;
         }
 
 
         setDisabled(false);
         setData({showSpinner: false});
-        console.log("<<<selected updateStages" + props.itinerary.user);
+        // console.log("<<<selected updateStages" + props.itinerary.user);
     }
+
+
+    // async function updateStages()
+    // {
+    //     console.log(">>>>selected updateStages " + props.itinerary.user);
+    //     console.log(selected)
+    //     setDisabled(true);
+    //     setData({showSpinner: true});
+    //
+    //
+    //
+    //     let remoteStages = Array.from(props.itinerary.stages.filter((stage) => stage.hostel !== 999));
+    //
+    //     console.log(selected.length);
+    //     console.log(remoteStages.length);
+    //     console.log(remoteStages);
+    //     console.log(props.itinerary.stages);
+    //
+    //     if(selected.length > remoteStages.length) //stage has been added
+    //     {
+    //         console.log("XXX Stage ADDED");
+    //
+    //         for(let currentStage of selected)
+    //         {
+    //             await fetchUpdateStage(currentStage.hostel, currentStage.nights, selected.indexOf(currentStage) + 1);
+    //         }
+    //         // props.itinerary.stages = selected;
+    //     }
+    //     else if(selected.length < remoteStages.length) //stage has been removed
+    //     {
+    //         console.log("XXX Stage removed");
+    //
+    //         for(let currentStage of selected)
+    //         {
+    //             await fetchUpdateStage(currentStage.hostel, currentStage.nights, selected.indexOf(currentStage) + 1);
+    //         }
+    //         console.log("YYY about to mask " + (selected.length + 1))
+    //         // await fetchUpdateStage(999, 999, (selected.length + 1)); //masks out the last element on remote
+    //         // props.itinerary.stages = selected;
+    //
+    //     }
+    //     else if(selected.length === remoteStages.length) // no change
+    //     {
+    //         console.log("XXX Stage THE SAME");
+    //     }
+    //
+    //
+    //     setDisabled(false);
+    //     setData({showSpinner: false});
+    //     console.log("<<<selected updateStages" + props.itinerary.user);
+    // }
 
 
 
