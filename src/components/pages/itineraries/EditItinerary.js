@@ -6,6 +6,7 @@ import {divIcon} from "leaflet/dist/leaflet-src.esm";
 import DroppableHostels from "./DroppableHostels";
 import {useData} from "../../data/DataContextProvider";
 import DraggableStage from "./DraggableStage";
+import Highlighter from "react-highlight-words";
 
 
 
@@ -343,10 +344,19 @@ export default function EditItinerary(props)
             <div className="" style={{minHeight: 300}}>
 
 
+                <div className="alert bg-secondary pb-0">
+                    <p>
+                        {"Drag and drop hostels on the left into the box on the right to create a stage, stages can be reorder in any way and can be removed by dragging them back into the left"}
+                    </p>
+                    <p>
+                        {"The number of nights you spend at a stage can be changed with the '-' and '+' buttons"}
+                    </p>
+                </div>
 
 
 
-                {"Edit stuff here for " +  props.itinerary.user}
+
+
 
                 <DragDropContext onDragEnd={onDragEndSave}>
 
@@ -357,13 +367,11 @@ export default function EditItinerary(props)
 
                             <div className="col-6 text-center " >
 
-                                <div>
-                                    Hostel Options
-                                </div>
+
                                 <Droppable droppableId="droppable" >
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={{height: '100%'}}>
-                                            <DroppableHostels isDraggingOver={snapshot.isDraggingOver}>
+                                            <DroppableHostels title={'Hostel Options'} isDraggingOver={snapshot.isDraggingOver}>
 
                                                 {items.map((item, index) => (
                                                     <Draggable key={item.id} draggableId={item.id} index={index}>
@@ -392,14 +400,10 @@ export default function EditItinerary(props)
                             <div className="col-6 text-center" >
 
 
-                                <div>
-                                    Your Itinerary
-                                </div>
-
                                 <Droppable droppableId="droppable2">
                                     {(provided, snapshot) => (
                                         <div ref={provided.innerRef} style={{height: '100%'}} >
-                                            <DroppableHostels isDraggingOver={snapshot.isDraggingOver} >
+                                            <DroppableHostels title={'Your Itinerary'} isDraggingOver={snapshot.isDraggingOver} >
                                                 {/*{provided.placeholder}*/}
 
 

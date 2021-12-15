@@ -109,7 +109,7 @@ export default function StageInfo(props)
                                 <button disabled={disabled} className={"btn btn-dark btn-sm"} onClick={() => handleNightsOnclick("-")} style={{height: 20}}>
                                     <span className={"font-monospace"}>-</span>
                                 </button>
-                                    <span className={"font-monospace"}>{ (nights / 100).toFixed(2).slice(-2) }</span>
+                                    <span className={"font-monospace"}>&nbsp;{ (nights / 100).toFixed(2).slice(-2) }&nbsp;</span>
                                 <button disabled={disabled} className={"btn btn-dark btn-sm"} onClick={() => handleNightsOnclick("+")} style={{height: 20}}>
                                     <span className={"font-monospace"}>+</span>
                                 </button>
