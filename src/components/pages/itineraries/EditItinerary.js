@@ -370,8 +370,8 @@ export default function EditItinerary(props)
 
                                 <Droppable droppableId="droppable" >
                                     {(provided, snapshot) => (
-                                        <div ref={provided.innerRef} style={{height: '100%'}}>
                                             <DroppableHostels title={'Hostel Options'} isDraggingOver={snapshot.isDraggingOver}>
+                                                <div ref={provided.innerRef} style={{height: '100%'}}>
 
                                                 {items.map((item, index) => (
                                                     <Draggable key={item.id} draggableId={item.id} index={index}>
@@ -384,10 +384,11 @@ export default function EditItinerary(props)
                                                 ))}
 
                                                 {provided.placeholder}
+                                                </div>
+
                                             </DroppableHostels>
 
 
-                                        </div>
                                     )}
                                 </Droppable>
 
@@ -402,9 +403,8 @@ export default function EditItinerary(props)
 
                                 <Droppable droppableId="droppable2">
                                     {(provided, snapshot) => (
-                                        <div ref={provided.innerRef} style={{height: '100%'}} >
                                             <DroppableHostels title={'Your Itinerary'} isDraggingOver={snapshot.isDraggingOver} >
-                                                {/*{provided.placeholder}*/}
+                                                <div ref={provided.innerRef} style={{height: '100%'}} >
 
 
                                                 {selected.map((item, index) => (
@@ -420,10 +420,11 @@ export default function EditItinerary(props)
                                                 ))}
 
                                                 {provided.placeholder}
+                                                </div>
+
                                             </DroppableHostels>
 
 
-                                        </div>
                                     )}
                                 </Droppable>
 
