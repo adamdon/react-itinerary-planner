@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {useData} from "../../data/DataContextProvider";
 
 
@@ -6,7 +6,10 @@ import {useData} from "../../data/DataContextProvider";
 
 export default function StageInfo(props)
 {
+    const [disabled, setDisabled] = useState(false);
     const [data, setData] = useData();
+    const [nights, setNights] = useState(Number(props.stage.nights));
+
 
 
     if (data.photos.length === 0)// do not render if photos hasn't loaded yet
@@ -18,6 +21,67 @@ export default function StageInfo(props)
     if((props.stage.hostel) === 999 && (props.stage.nights === 999))
     {
         return (<div>No Show, {props.stage.hostel} , {props.stage.nights}, {props.stage.stage}, {props.index} </div>);
+    }
+
+
+    async function handleNightsOnclick(type)
+    {
+        setDisabled(true);
+        let currentNights = nights;
+
+        if(type === "-") //minus button
+        {
+            if(currentNights <= 1)
+            {
+                setData({toastMessage: "You can't stay in hostel for less than a day"})
+            }
+            else
+            {
+                setNights((nights) => (currentNights - 1));
+                await fetchUpdateNights(props.hostel.id, (currentNights - 1).toString(), (props.index + 1));
+            }
+        }
+        else // plus button
+        {
+            if(nights === 14)
+            {
+                setData({toastMessage: "You can't stay in a hostel for more than 2 weeks"})
+            }
+            else
+            {
+                setNights((nights) => (nights + 1));
+                await fetchUpdateNights(props.hostel.id, (currentNights + 1).toString(), (props.index + 1));
+            }
+        }
+
+        setDisabled(false);
+    }
+
+    async function fetchUpdateNights(hostelId, nightsNumber, stageNumber)
+    {
+        setData({showSpinner: true});
+
+        let requestBody = {hostel: Number(hostelId), nights: nightsNumber};
+        let methodType = "POST"
+        let requestUrl = (data.config.baseUrl + "/itineraries/stages/update/" + props.itinerary.user + "/" + stageNumber);
+        let requestHeaders = {"Content-Type": "application/json"};
+
+        const response = await fetch(requestUrl, {method: methodType, headers: requestHeaders, body: JSON.stringify(requestBody)});
+
+        if(Number(response.status.toString().substring(0, 1)) === 2) //check that response code starts with 2
+        {
+            const jsonData = await response.json();
+            console.log(jsonData);
+            console.log(requestBody);
+            console.log(requestUrl);
+            // console.log(jsonData);
+        }
+        else
+        {
+            setData({toastError: "Error: " + response.status + " - Could not action"});
+        }
+
+        setData({showSpinner: false});
     }
 
 
@@ -40,7 +104,17 @@ export default function StageInfo(props)
                     </tr>
                     <tr className="table-active">
                         <td className="text-end text-light px-3">Nights <i className="fa fa-hotel"></i> :</td>
-                        <td className="text-start text-light px-3">{props.stage.nights}</td>
+                        <td className="text-start text-light px-3">
+                            <span>
+                                <button disabled={disabled} className={"btn btn-dark btn-sm"} onClick={() => handleNightsOnclick("-")} style={{height: 20}}>
+                                    <span className={"font-monospace"}>-</span>
+                                </button>
+                                    <span className={"font-monospace"}>{ (nights / 100).toFixed(2).slice(-2) }</span>
+                                <button disabled={disabled} className={"btn btn-dark btn-sm"} onClick={() => handleNightsOnclick("+")} style={{height: 20}}>
+                                    <span className={"font-monospace"}>+</span>
+                                </button>
+                            </span>
+                        </td>
                     </tr>
 
                     <tr className="table-active">
