@@ -7,6 +7,7 @@ import DroppableHostels from "./DroppableHostels";
 import {useData} from "../../data/DataContextProvider";
 import DraggableStage from "./DraggableStage";
 import Highlighter from "react-highlight-words";
+import ChangeDate from "./ChangeDate";
 
 
 
@@ -353,6 +354,8 @@ export default function EditItinerary(props)
                     </p>
                 </div>
 
+
+                <ChangeDate itinerary={props.itinerary}/>
 
 
 

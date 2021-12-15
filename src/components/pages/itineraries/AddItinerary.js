@@ -123,7 +123,7 @@ export default function AddItinerary(props)
             <h4>Start your journey here</h4>
 
             <p className="mb-3">
-                Add a new Itinerary then edit bellow
+                Add a new Itinerary by entering your name, then click edit bellow. Your name will automatically be entered into the search input. To find someone else's simply change the text to their name
             </p>
 
             <div className="input-group">
