@@ -100,10 +100,10 @@ export default function StageInfo(props)
         else
         {
             let lastStage = stages[props.index - 1];
-            console.log(stages);
-            console.log(props.index);
-            console.log(props.index - 1);
-            console.log(lastStage);
+            // console.log(stages);
+            // console.log(props.index);
+            // console.log(props.index - 1);
+            // console.log(lastStage);
             let lastHostel = data.hostels.find((hostel) => Number(hostel.id) === lastStage.hostel);
             let lastHostelLocation = lastHostel.location;
 
