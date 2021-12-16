@@ -50,9 +50,9 @@ export default function ItineraryBox(props)
             <EditItinerary itinerary={props.itinerary}/>
 
 
-            <div>
-                &nbsp;
-            </div>
+            {/*<div>*/}
+            {/*    &nbsp;*/}
+            {/*</div>*/}
 
             <div className="mt-3 text-center">
                 <div className="btn-group" role="group" aria-label="Basic outlined example">
