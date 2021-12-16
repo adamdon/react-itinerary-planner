@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { getDistance } from 'geolib';
 import {useData} from "../../data/DataContextProvider";
 
 
@@ -84,6 +85,34 @@ export default function StageInfo(props)
         setData({showSpinner: false});
     }
 
+    function getDistanceFromLastStage()
+    {
+        if(props.index === 0)
+        {
+            return "Start"
+        }
+        else
+        {
+            let lastStage = props.itinerary.stages[props.index - 1];
+            let lastHostel = data.hostels.find((hostel) => Number(hostel.id) === lastStage.hostel);
+            let lastHostelLocation = lastHostel.location;
+
+            let currentHostelLocation = props.hostel.location;
+
+
+            let meterDistance = getDistance(
+                { latitude: lastHostelLocation.lat, longitude: lastHostelLocation.long },
+                { latitude: currentHostelLocation.lat, longitude: currentHostelLocation.long }
+            );
+
+            let kmDistance = (Number(meterDistance) / 1000).toFixed(0);
+            let formattedDistance = kmDistance.toString() + "km"
+
+
+            return formattedDistance;
+        }
+    }
+
 
 
     return (
@@ -93,28 +122,29 @@ export default function StageInfo(props)
             <table className="table table-sm table-hover bg-primary table-borderless table-fit d-inline-block m-0 pb-1 rounded-3">
                 <thead>
                     <tr className="table-active">
-                        <th className="text-center text-light" colSpan={2}>Stage {props.index}</th>
+                        <th className="text-center text-light" colSpan={2}>Stage {props.index + 1}</th>
                     </tr>
                 </thead>
                 <tbody className="">
-                    <tr className="table-active">
-                        <td className="text-end text-light px-3">Hostel <i className="fa fa-hotel"></i> :</td>
-                        <td className="text-start text-light px-3">{props.hostel.name}</td>
 
-                    </tr>
                     <tr className="table-active">
                         <td className="text-end text-light px-3">Nights <i className="fa fa-hotel"></i> :</td>
                         <td className="text-start text-light px-3">
                             <span>
-                                <button disabled={disabled} className={"btn btn-dark btn-sm"} onClick={() => handleNightsOnclick("-")} style={{height: 20}}>
+                                <button disabled={disabled} className={"btn btn-outline-light btn-sm pt-0"} onClick={() => handleNightsOnclick("-")} style={{height: 20}}>
                                     <span className={"font-monospace"}>-</span>
                                 </button>
                                     <span className={"font-monospace"}>&nbsp;{ (nights / 100).toFixed(2).slice(-2) }&nbsp;</span>
-                                <button disabled={disabled} className={"btn btn-dark btn-sm"} onClick={() => handleNightsOnclick("+")} style={{height: 20}}>
+                                <button disabled={disabled} className={"btn btn-outline-light btn-sm pt-0"} onClick={() => handleNightsOnclick("+")} style={{height: 20}}>
                                     <span className={"font-monospace"}>+</span>
                                 </button>
                             </span>
                         </td>
+                    </tr>
+
+                    <tr className="table-active">
+                        <td className="text-end text-light px-3">Distance <i className="fa fa-flag-checkered"></i> :</td>
+                        <td className="text-start text-light px-3">{getDistanceFromLastStage()}</td>
                     </tr>
 
                     <tr className="table-active">
