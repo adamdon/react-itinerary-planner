@@ -24,7 +24,9 @@ export default function DataContextProvider({children})
             showSpinner: false,
             config: {
                 pexelsApiKey: ("563492ad6f9170000100000151" + "dafa4f65b54cb2b8e208e3c4d7395" + (3 - 2).toString()),
-                baseUrl: "http://localhost:3001/api",
+                // baseUrl: "http://localhost:3001/api",
+                baseUrl: "https://react-itinerary-planner-api.herokuapp.com/api",
+
             },
             photos: [],
             itineraries: [],
