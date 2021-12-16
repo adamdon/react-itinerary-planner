@@ -52,7 +52,7 @@ export default function HostelBox(props)
                 <div className="mt-2 text-center">
                     <div className="d-grid gap-2" role="group" aria-label="Basic mixed styles example">
                         {/*<button type="button" className="btn btn-outline-light"><i className="fa fa-share-alt"></i> Share</button>*/}
-                        <a href={'http://localhost:3000/hostel/' + props.hostel.id} className="btn btn-outline-light" target="_blank" rel="noopener noreferrer"><i className="fa fa-share-alt"></i> Share</a>
+                        <a href={'./hostel/' + props.hostel.id} className="btn btn-outline-light" target="_blank" rel="noopener noreferrer"><i className="fa fa-share-alt"></i> Share</a>
                         <button onClick={moreOnClick} data-bs-toggle="collapse" data-bs-target={"#collapse" + props.hostel.id} aria-expanded="false" type="button" className="btn btn-outline-light"><i className="fa fa-info-circle"></i>
                             {size === 6 ? " Show More" : " Show Less"}
                         </button>
