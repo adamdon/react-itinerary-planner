@@ -13,7 +13,7 @@ export default function StageInfo(props)
 
 
 
-    if (data.photos.length === 0)// do not render if photos hasn't loaded yet
+    if (data.photos.length === 0 || data.hostels.length === 0 || data.itineraries.length === 0)// do not render if data hasn't loaded yet
     {
         return null;
     }
@@ -87,13 +87,23 @@ export default function StageInfo(props)
 
     function getDistanceFromLastStage()
     {
-        if(props.index === 0)
+        let stages = Array.from(props.itinerary.stages.filter((stage) => stage.hostel !== 999));
+
+        if(data.photos.length === 0 || data.hostels.length === 0 || data.itineraries.length === 0 || stages.length === 0)
         {
-            return "Start"
+            return "";
+        }
+        else if(props.index === 0)
+        {
+            return "Start";
         }
         else
         {
-            let lastStage = props.itinerary.stages[props.index - 1];
+            let lastStage = stages[props.index - 1];
+            console.log(stages);
+            console.log(props.index);
+            console.log(props.index - 1);
+            console.log(lastStage);
             let lastHostel = data.hostels.find((hostel) => Number(hostel.id) === lastStage.hostel);
             let lastHostelLocation = lastHostel.location;
 

@@ -9,7 +9,7 @@ export default function PreviewItinerary(props)
 {
     const [data, setData] = useData();
 
-    if(data.hostels.length === 0)
+    if(data.hostels.length === 0 || data.itineraries.length === 0)
     {
         return null;
     }
@@ -28,7 +28,6 @@ export default function PreviewItinerary(props)
                 if(stages.indexOf(stage) !== 0)//skip the first stage
                 {
                     let lastStage = stages[stages.indexOf(stage) - 1];
-                    console.log(lastStage);
                     let lastHostel = data.hostels.find((hostel) => Number(hostel.id) === lastStage.hostel);
                     let lastHostelLocation = lastHostel.location;
 
