@@ -1,0 +1,5 @@
+// {
+//     devServer: {
+//         disableHostCheck: true
+//     }
+// }
