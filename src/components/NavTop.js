@@ -40,9 +40,9 @@ export default function NavTop()
                     <li>
                         <a href="./itineraries" className="dropdown-item text-center">Itineraries</a>
                     </li>
-                    <li>
-                        <Link to="/test" className="dropdown-item text-center">Test</Link>
-                    </li>
+                    {/*<li>*/}
+                    {/*    <Link to="/test" className="dropdown-item text-center">Test</Link>*/}
+                    {/*</li>*/}
                 </ul>
             </div>
 
